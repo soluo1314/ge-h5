@@ -1,0 +1,42 @@
+// base color
+$blue: #324157;
+$light-blue: #3a71a8;
+$red: #c03639;
+$pink: #e65d6e;
+$green: #30b08f;
+$tiffany: #4ab7bd;
+$yellow: #fec171;
+$white: #ffffff;
+
+// http://v1.iviewui.com/components/color
+$color-primary: #2d8cf0;
+$color-light-primary: #5cadff;
+$color-dark-primary: #2b85e4;
+$color-info: #2db7f5;
+$color-success: #19be6b;
+$color-warning: #ff9900;
+$color-error: #ed4014;
+
+$color-title: #17233d;
+$color-content: #515a6e;
+$color-content-sub: #808695;
+$color-disabled: #c5c8ce;
+$color-border: #dcdee2;
+$color-divider: #e8eaec;
+$color-backgroud: #f8f8f9;
+
+// add theme, make sure that can be used in style or javascript
+// Step1: update variables.scss
+// Step2: update themes.scss
+// Step3: update theme.js
+$theme-blue: #2d8cf0;
+$theme-blue-sub: #5CB9FF;
+
+$theme-red: #F26755;
+$theme-red-sub: #f9928c;
+
+$theme-green: #1AAD19;
+$theme-green-sub: #9ED99D;
+
+$theme-purple: #796EFF;
+$theme-purple-sub: #8b92ff;

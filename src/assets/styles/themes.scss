@@ -1,0 +1,30 @@
+$themes: (
+        blue: (
+                color: $theme-blue,
+                color-sub: $theme-blue-sub,
+                nav-bar-bg: $theme-blue,
+                nav-bar-title: $white,
+                nav-bar-left: $white,
+        ),
+        red: (
+                color: $theme-red,
+                color-sub: $theme-red-sub,
+                nav-bar-bg: $theme-red,
+                nav-bar-title: $white,
+                nav-bar-left: $white,
+        ),
+        green: (
+                color: $theme-green,
+                color-sub: $theme-green-sub,
+                nav-bar-bg: $theme-green,
+                nav-bar-title: $white,
+                nav-bar-left: $white,
+        ),
+        purple: (
+                color: $theme-purple,
+                color-sub: $theme-purple-sub,
+                nav-bar-bg: $theme-purple,
+                nav-bar-title: $white,
+                nav-bar-left: $white,
+        ),
+);

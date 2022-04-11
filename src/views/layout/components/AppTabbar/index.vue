@@ -1,0 +1,85 @@
+<template>
+  <div>
+    <van-tabbar
+      fixed
+      route
+      v-model="active"
+      :active-color="$store.getters.themeColor"
+      class="ignore-max-container"
+      style="right: 0"
+    >
+      <van-tabbar-item replace to="/home">
+        <span>首页</span>
+        <template #icon="props">
+          <template
+            v-if="props.active"
+            :style="props.active ? { fill: $store.getters.themeColor } : {}"
+          >
+            <svg-icon icon-class="tabbar-home-fill" />
+          </template>
+          <template v-else>
+            <svg-icon icon-class="tabbar-home" />
+          </template>
+        </template>
+      </van-tabbar-item>
+      <van-tabbar-item replace to="/home">
+        <span>分类</span>
+        <template #icon="props">
+          <template
+            v-if="props.active"
+            :style="props.active ? { fill: $store.getters.themeColor } : {}"
+          >
+            <svg-icon icon-class="tabbar-subcribe-fill" />
+          </template>
+          <template v-else>
+            <svg-icon icon-class="tabbar-subcribe" />
+          </template>
+        </template>
+      </van-tabbar-item>
+      <van-tabbar-item replace to="/home">
+        <span>通知</span>
+        <template #icon="props">
+          <template
+            v-if="props.active"
+            :style="props.active ? { fill: $store.getters.themeColor } : {}"
+          >
+            <svg-icon icon-class="tabbar-comment-fill" />
+          </template>
+          <template v-else>
+            <svg-icon icon-class="tabbar-comment" />
+          </template>
+        </template>
+      </van-tabbar-item>
+      <van-tabbar-item replace to="/home">
+        <span>我的</span>
+        <template #icon="props">
+          <template
+            v-if="props.active"
+            :style="props.active ? { fill: $store.getters.themeColor } : {}"
+          >
+            <svg-icon icon-class="tabbar-mine-fill" />
+          </template>
+          <template v-else>
+            <svg-icon icon-class="tabbar-mine" />
+          </template>
+        </template>
+      </van-tabbar-item>
+    </van-tabbar>
+  </div>
+</template>
+
+<script>
+  import Vue from 'vue'
+  import { Tabbar, TabbarItem } from 'vant'
+  Vue.use(Tabbar)
+  Vue.use(TabbarItem)
+  export default {
+    name: 'AppTabbar',
+    components: {},
+    data() {
+      return {
+        active: 0,
+      }
+    },
+  }
+</script>
