@@ -1,6 +1,16 @@
+/*
+ * @Author: xyw
+ * @Date: 2022-04-11 11:51:14
+ * @LastEditors: xyw
+ * @LastEditTime: 2022-04-11 17:03:41
+ * @Description:
+ */
 const state = {
-  themeType: 'blue',
+  themeType: 'nomal',
   themes: {
+    orange: {
+      color: 'rgb(210, 160, 95)',
+    },
     blue: {
       color: '#2d8cf0',
     },

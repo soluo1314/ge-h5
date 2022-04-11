@@ -1,0 +1,58 @@
+  $colors: (
+    white: #fff
+  );
+  $font-sizes: (
+    sm: 12,
+    md: 14,
+    lg: 16,
+    xl: 18,
+    xxl: 20,
+    xxxl: 24
+  );
+  //flex布局 主轴
+  $flex-jc: (
+    start: flex-start,
+    end: flex-end,
+    center: center,
+    between: space-between,
+    around: space-around,
+  );
+  //flex布局 侧轴
+  $flex-ai: (
+    start: flex-start,
+    end: flex-end,
+    center: center,
+    stretch: stretch,
+    //交叉轴方向 等高
+  );
+  //text-types 对齐方式 left center right
+  $text-types: (
+    lt: left,
+    ct: center,
+    rt: right,
+  );
+  //margin padding
+  $spacing-types: (
+    m: margin,
+    p: padding,
+  );
+  $spacing-directions: (
+    t: top,
+    b: bottom,
+    l: left,
+    r: right,
+  );
+  $spacing-sizes: (
+    0: 0,
+    1: 10,
+    2: 20,
+    3: 30,
+    4: 40,
+    5: 50,
+    6: 60,
+    7: 70,
+    8: 80,
+    9: 90,
+    10: 100,
+    11: 110,
+  );

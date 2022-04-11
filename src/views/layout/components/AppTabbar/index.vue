@@ -1,3 +1,10 @@
+<!--
+ * @Author: xyw
+ * @Date: 2022-04-11 11:51:14
+ * @LastEditors: xyw
+ * @LastEditTime: 2022-04-11 16:28:46
+ * @Description: 
+-->
 <template>
   <div>
     <van-tabbar
@@ -9,58 +16,73 @@
       style="right: 0"
     >
       <van-tabbar-item replace to="/home">
-        <span>首页</span>
+        <span>Home</span>
         <template #icon="props">
           <template
             v-if="props.active"
             :style="props.active ? { fill: $store.getters.themeColor } : {}"
           >
-            <svg-icon icon-class="tabbar-home-fill" />
+            <!-- <svg-icon icon-class="tabbar-home-fill" /> -->
+            <img src="../../../../assets/images/tabbar/home-1.png" />
           </template>
           <template v-else>
-            <svg-icon icon-class="tabbar-home" />
+            <img src="../../../../assets/images/tabbar/home.png" />
           </template>
         </template>
       </van-tabbar-item>
-      <van-tabbar-item replace to="/home">
-        <span>分类</span>
+      <van-tabbar-item replace to="/prize">
+        <span>Prize Pool</span>
         <template #icon="props">
           <template
             v-if="props.active"
             :style="props.active ? { fill: $store.getters.themeColor } : {}"
           >
-            <svg-icon icon-class="tabbar-subcribe-fill" />
+            <img src="../../../../assets/images/tabbar/prize-1.png" />
           </template>
           <template v-else>
-            <svg-icon icon-class="tabbar-subcribe" />
+            <img src="../../../../assets/images/tabbar/prize.png" />
           </template>
         </template>
       </van-tabbar-item>
-      <van-tabbar-item replace to="/home">
-        <span>通知</span>
+      <van-tabbar-item replace to="/product">
+        <span>Product</span>
         <template #icon="props">
           <template
             v-if="props.active"
             :style="props.active ? { fill: $store.getters.themeColor } : {}"
           >
-            <svg-icon icon-class="tabbar-comment-fill" />
+            <img src="../../../../assets/images/tabbar/product-1.png" />
           </template>
           <template v-else>
-            <svg-icon icon-class="tabbar-comment" />
+            <img src="../../../../assets/images/tabbar/product.png" />
           </template>
         </template>
       </van-tabbar-item>
-      <van-tabbar-item replace to="/home">
-        <span>我的</span>
+      <van-tabbar-item replace>
+        <span>Community</span>
         <template #icon="props">
           <template
             v-if="props.active"
             :style="props.active ? { fill: $store.getters.themeColor } : {}"
           >
-            <svg-icon icon-class="tabbar-mine-fill" />
+            <img src="../../../../assets/images/tabbar/community.png" />
           </template>
           <template v-else>
-            <svg-icon icon-class="tabbar-mine" />
+            <img src="../../../../assets/images/tabbar/community.png" />
+          </template>
+        </template>
+      </van-tabbar-item>
+      <van-tabbar-item replace to="/me">
+        <span>Me</span>
+        <template #icon="props">
+          <template
+            v-if="props.active"
+            :style="props.active ? { fill: $store.getters.themeColor } : {}"
+          >
+            <img src="../../../../assets/images/tabbar/me-1.png" />
+          </template>
+          <template v-else>
+            <img src="../../../../assets/images/tabbar/me.png" />
           </template>
         </template>
       </van-tabbar-item>
@@ -83,3 +105,12 @@
     },
   }
 </script>
+
+<style lang="scss" scoped>
+  .ignore-max-container {
+    background: rgb(26, 26, 26);
+    .van-tabbar-item--active {
+      background: rgb(26, 26, 26);
+    }
+  }
+</style>

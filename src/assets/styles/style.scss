@@ -1,0 +1,160 @@
+@import './variable.scss';
+.w-100 {
+    width: 100%;
+  }
+  
+  .h-100 {
+    height: 100%;
+  }
+
+  .zn-bold {
+    font-weight: bold !important;
+  }
+  .zn-bold-5 {
+    font-weight: 500;
+  }
+  .zn-block {
+    display: block;
+  }
+  .zn-in-block {
+    display: inline-block;
+  }
+  .zn-cursor {
+    cursor: pointer;
+  }
+  .zn-flex {
+    display: flex;
+  }
+  
+  .zn-flex-column {
+    flex-direction: column;
+  }
+  
+  .zn-flex-wrap {
+    flex-wrap: wrap;
+  }
+  
+  .zn-flex-1 {
+    flex: 1;
+  }
+  .zn-flex-2 {
+    flex: 2;
+  }
+  .zn-flex-3 {
+    flex: 3;
+  }
+  .zn-flex-4 {
+    flex: 4;
+  }
+  .zn-fs-ellipsis {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+  //对齐两端文本
+  .zn-text-justify {
+    text-align-last: justify;
+  }
+  .zn-title {
+    color: #222222;
+    font-weight: 500;
+    font-size: 14px;
+  }
+  .fl {
+    float: left;
+  }
+  .fr {
+    float: right;
+  }
+  .clearfix:after {
+    content: '.';
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+  }
+  $common-size : 1px;
+  // 边框
+  @each $key,$value in $colors {
+    .zn-border-#{$key} {
+        border-color: $value !important;
+    }
+  }
+  //颜色
+  @each $key,$value in $colors {
+    .zn-text-#{$key} {
+    color: $value!important;
+    }
+    .zn-bg-#{$key} {
+    background-color: $value;
+    }
+  }
+  //字体 fs-xxs 8px fs-sm 12px fs-md 13px
+  @each $key,$value in $font-sizes {
+    .zn-fs-#{$key} {
+        font-size: $value * $common-size!important;
+      }
+  }
+  //text对齐方式
+  @each $key,$value in $text-types {
+    .zn-text-#{$key} {
+        text-align: $value;
+      }
+  }
+  //主轴方向 布局
+  @each $key,$value in $flex-jc {
+    .zn-jc-#{$key} {
+        display: flex;
+        justify-content: $value;
+      }
+  } 
+  //侧轴方向 布局
+  @each $key,$value in $flex-ai {
+    .zn-ai-#{$key} {
+        display: flex;
+        align-items: $value;
+      }
+  }
+  //margin padding
+  @each $key,$value in $spacing-sizes {
+    .zn-m-#{$key} {
+        margin: $value*$common-size!important;
+      }
+      .zn-mx-#{$key} {
+        margin: 0 $value*$common-size!important;
+      }
+      .zn-my#{$key} {
+        margin:$value*$common-size 0 !important;
+      }
+      .zn-mr-#{$key} {
+        margin-right: $value*$common-size!important;
+      }
+      .zn-ml-#{$key} {
+        margin-left: $value*$common-size!important;
+      }
+      .zn-mt-#{$key} {
+        margin-top: $value*$common-size!important;
+      }
+      .zn-mb-#{$key} {
+        margin-bottom: $value*$common-size!important;
+      }
+      .zn-p-#{$key} {
+        padding: $value*$common-size!important;
+      }
+      .zn-px-#{$key} {
+        padding: 0 $value*$common-size!important;
+      }
+      .zn-pr-#{$key} {
+        padding-right: $value*$common-size!important;
+      }
+      .zn-pl-#{$key} {
+        padding-left: $value*$common-size!important;
+      }
+      .zn-pt-#{$key} {
+        padding-top: $value*$common-size!important;
+      }
+      .zn-pb-#{$key} {
+        padding-bottom: $value*$common-size!important;
+      }
+  }
+  

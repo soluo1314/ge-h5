@@ -1,3 +1,10 @@
+/*
+ * @Author: xyw
+ * @Date: 2022-04-11 11:51:14
+ * @LastEditors: xyw
+ * @LastEditTime: 2022-04-11 16:45:13
+ * @Description:
+ */
 import { Layout } from '../constants'
 
 const HomeRoute = {
@@ -8,7 +15,7 @@ const HomeRoute = {
       path: '/home',
       name: 'Home',
       component: () => import('@/views/home/index'),
-      meta: { title: '首页', keepAlive: false, showTab: true },
+      meta: { title: 'Home', keepAlive: false, showTab: true },
     },
   ],
 }
