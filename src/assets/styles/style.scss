@@ -74,6 +74,7 @@
     visibility: hidden;
   }
   $common-size : 1px;
+  // $common-size : 0.0125rem;
   // 边框
   @each $key,$value in $colors {
     .zn-border-#{$key} {
