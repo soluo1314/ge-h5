@@ -2,7 +2,7 @@
  * @Author: xyw
  * @Date: 2022-04-11 11:51:14
  * @LastEditors: xyw
- * @LastEditTime: 2022-04-12 22:00:59
+ * @LastEditTime: 2022-04-14 16:11:05
  * @Description: 
 -->
 <template>
@@ -14,7 +14,11 @@
             <van-image class="logo" src="https://img01.yzcdn.cn/vant/cat.jpeg" />
             <div style="padding-left: 0.5rem">gz2002</div>
           </div>
-          <img class="logo" src="../../assets/images/home/erji.png" />
+          <img
+            class="logo"
+            src="../../assets/images/home/erji.png"
+            @click="$router.push('/home/qrcode')"
+          />
         </div>
         <van-swipe
           :autoplay="3000"
@@ -28,19 +32,19 @@
       </div>
       <div class="index_cer">
         <div class="zn-flex">
-          <div class="zn-flex-1 zn-text-ct">
+          <div class="zn-flex-1 zn-text-ct" @click="$router.push('/home/recharge')">
             <img src="../../assets/images/home/icon1.png" alt="" />
             <div class="text">Recharge</div>
           </div>
-          <div class="zn-flex-1 zn-text-ct">
+          <div class="zn-flex-1 zn-text-ct" @click="$router.push('/home/withdrawal')">
             <img src="../../assets/images/home/icon2.png" alt="" />
             <div class="text">Withdrawal</div>
           </div>
-          <div class="zn-flex-1 zn-text-ct">
+          <div class="zn-flex-1 zn-text-ct" @click="$router.push('/home/teams')">
             <img src="../../assets/images/home/icon3.png" alt="" />
             <div class="text">Number of teams</div>
           </div>
-          <div class="zn-flex-1 zn-text-ct">
+          <div class="zn-flex-1 zn-text-ct" @click="$router.push('/home/link')">
             <img src="../../assets/images/home/icon4.png" alt="" />
             <div class="text">Invitation link</div>
           </div>
@@ -58,7 +62,12 @@
           </template>
         </van-notice-bar>
         <div>
-          <video class="w-100" src="https://ge.tianbo8.top/public/video/video.mp4"></video>
+          <video
+            autoplay
+            controls
+            class="w-100"
+            src="https://ge.tianbo8.top/public/video/video.mp4"
+          ></video>
         </div>
         <div class="newsbox">
           <div class="titbox"><p>News information</p><i class="line"></i></div>
