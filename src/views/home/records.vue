@@ -2,35 +2,37 @@
  * @Author: xyw
  * @Date: 2022-04-11 11:51:14
  * @LastEditors: xyw
- * @LastEditTime: 2022-04-14 20:05:09
+ * @LastEditTime: 2022-04-15 15:39:21
  * @Description: 
 -->
 <template>
   <div class="app-container">
     <nav-bar back="true" content="Recharge"> </nav-bar>
-    <div class="tablebox">
-      <div class="table">
-        <div class="tr zn-flex zn-ai-center w-100">
-          <div class="th">Time/Order No.</div>
-          <div class="th">Money</div>
-          <div class="th">Status</div>
-          <div class="th">Details</div>
-        </div>
-        <div class="tr zn-flex zn-ai-center w-100" v-for="item in tableData" :key="item">
-          <div class="td">
-            <div>04-14 14:20:51</div>
-            <div>158d37480124eb7f</div>
+    <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
+      <div class="tablebox">
+        <div class="table">
+          <div class="tr zn-flex zn-ai-center w-100">
+            <div class="th">Time/Order No.</div>
+            <div class="th">Money</div>
+            <div class="th">Status</div>
+            <div class="th">Details</div>
           </div>
-          <div class="td">550</div>
-          <div class="td">Waiting payment</div>
-          <div class="td">
-            <van-button size="mini" type="warning" @click="$router.push('/home/orderdetails')"
-              >View</van-button
-            >
+          <div class="tr zn-flex zn-ai-center w-100" v-for="item in tableData" :key="item">
+            <div class="td">
+              <div>04-14 14:20:51</div>
+              <div>158d37480124eb7f</div>
+            </div>
+            <div class="td">550</div>
+            <div class="td">Waiting payment</div>
+            <div class="td">
+              <van-button size="mini" type="warning" @click="$router.push('/home/orderdetails')"
+                >View</van-button
+              >
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </van-list>
   </div>
 </template>
 
@@ -43,6 +45,8 @@
     },
     data() {
       return {
+        loading: false,
+        finished: false,
         tableData: [1, 2, 3, 4, 5],
       }
     },

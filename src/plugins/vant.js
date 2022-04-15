@@ -2,7 +2,7 @@
  * @Author: xyw
  * @Date: 2022-04-11 11:51:14
  * @LastEditors: xyw
- * @LastEditTime: 2022-04-14 16:19:39
+ * @LastEditTime: 2022-04-15 15:33:35
  * @Description:
  */
 import Vue from 'vue'
@@ -17,6 +17,9 @@ import {
   Field,
   RadioGroup,
   Radio,
+  List,
+  Cell,
+  CellGroup,
 } from 'vant'
 Vue.use(Button)
 Vue.use(Toast)
@@ -28,3 +31,6 @@ Vue.use(Icon)
 Vue.use(Field)
 Vue.use(RadioGroup)
 Vue.use(Radio)
+Vue.use(List)
+Vue.use(Cell)
+Vue.use(CellGroup)
