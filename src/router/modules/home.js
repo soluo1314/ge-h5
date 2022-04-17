@@ -2,7 +2,7 @@
  * @Author: xyw
  * @Date: 2022-04-11 11:51:14
  * @LastEditors: xyw
- * @LastEditTime: 2022-04-14 20:02:46
+ * @LastEditTime: 2022-04-15 18:46:02
  * @Description:
  */
 import { Layout } from '../constants'
@@ -52,6 +52,24 @@ const HomeRoute = {
       name: 'HomeWithdrawalrecords',
       component: () => import('@/views/home/withdrawalrecords'),
       meta: { title: 'HomeWithdrawalrecords', keepAlive: false, showTab: false },
+    },
+    {
+      path: '/home/teams',
+      name: 'HomeTeams',
+      component: () => import('@/views/home/teams'),
+      meta: { title: 'HomeTeams', keepAlive: false, showTab: false },
+    },
+    {
+      path: '/home/link',
+      name: 'HomeInvitation',
+      component: () => import('@/views/home/invitation'),
+      meta: { title: 'HomeInvitation', keepAlive: false, showTab: false },
+    },
+    {
+      path: '/home/newsdetail',
+      name: 'HomeNewsdetail',
+      component: () => import('@/views/home/newsdetail'),
+      meta: { title: 'HomeNewsdetail', keepAlive: false, showTab: false },
     },
   ],
 }

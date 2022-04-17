@@ -29,6 +29,15 @@ module.exports = {
       warnings: false,
       errors: true,
     },
+    proxy: {
+      '/api': {
+        target: process.env.VUE_APP_API_URL,
+        changeOrigin: true, //是否跨域
+        // pathRewrite: {
+        //   '^/web': '',
+        // },
+      },
+    },
   },
   css: {
     extract: true,

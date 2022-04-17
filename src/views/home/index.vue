@@ -1,8 +1,8 @@
 <!--
  * @Author: xyw
  * @Date: 2022-04-11 11:51:14
- * @LastEditors: xyw
- * @LastEditTime: 2022-04-14 16:11:05
+ * @LastEditors: lz
+ * @LastEditTime: 2022-04-17 19:10:11
  * @Description: 
 -->
 <template>
@@ -72,7 +72,12 @@
         <div class="newsbox">
           <div class="titbox"><p>News information</p><i class="line"></i></div>
           <div class="listbox">
-            <div class="item" v-for="item in [4, 5, 6, 7]" :key="item">
+            <div
+              class="item"
+              v-for="item in [4, 5, 6, 7]"
+              :key="item"
+              @click="$router.push('/home/newsdetail')"
+            >
               <p>good news good news</p>
               <img src="../../assets/images/home/women.png" />
             </div>
@@ -84,10 +89,20 @@
 </template>
 
 <script>
+  import { getHome } from '@/api/homeApi'
   export default {
     name: 'Home',
     data() {
       return {}
+    },
+    created() {
+      this.getHomeData()
+    },
+    methods: {
+      async getHomeData() {
+        const res = await getHome()
+        console.log(res)
+      },
     },
   }
 </script>
