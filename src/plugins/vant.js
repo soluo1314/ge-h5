@@ -20,6 +20,7 @@ import {
   List,
   Cell,
   CellGroup,
+  Uploader,
 } from 'vant'
 Vue.use(Button)
 Vue.use(Toast)
@@ -34,3 +35,4 @@ Vue.use(Radio)
 Vue.use(List)
 Vue.use(Cell)
 Vue.use(CellGroup)
+Vue.use(Uploader)

@@ -2,7 +2,7 @@
  * @Author: xyw
  * @Date: 2022-04-11 11:51:14
  * @LastEditors: xyw
- * @LastEditTime: 2022-04-18 08:56:41
+ * @LastEditTime: 2022-04-18 09:24:25
  * @Description: 
 -->
 <template>
@@ -11,7 +11,11 @@
       <div class="index_top">
         <div class="headbox zn-jc-between">
           <div class="zn-flex zn-ai-center">
-            <van-image class="logo" src="https://img01.yzcdn.cn/vant/cat.jpeg" />
+            <van-image
+              class="logo"
+              @click="$router.push('/me')"
+              src="https://img01.yzcdn.cn/vant/cat.jpeg"
+            />
             <div style="padding-left: 0.5rem">gz2002</div>
           </div>
           <img

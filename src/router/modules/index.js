@@ -10,10 +10,11 @@ import HomeRoute from './home'
 import MeRoute from './me'
 import PrizeRoute from './prize'
 import ProductRoute from './product'
+import LoginRoute from './login'
 const RootRoute = {
   path: '/',
   component: Layout,
   redirect: '/home',
 }
 
-export const basicRoutes = [RootRoute, HomeRoute, MeRoute, PrizeRoute, ProductRoute]
+export const basicRoutes = [RootRoute, HomeRoute, MeRoute, PrizeRoute, ProductRoute, LoginRoute]

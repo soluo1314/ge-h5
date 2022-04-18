@@ -98,7 +98,7 @@
           background: transparent;
           border: 1px solid #7c7c7c;
           padding: 0.4rem 0.5rem;
-          margin-top: 0.5rem;
+          // margin-top: 0.5rem;
           border-radius: 0.3rem;
         }
       }

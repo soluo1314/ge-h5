@@ -90,6 +90,7 @@
           .td {
             text-align: center;
             height: 2rem;
+            line-height: 2rem;
             font-size: 0.8rem;
             padding: 0.5rem 0.3rem;
             border-right: 1px solid #484848;

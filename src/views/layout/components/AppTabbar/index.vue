@@ -13,7 +13,7 @@
       v-model="active"
       :active-color="$store.getters.themeColor"
       class="ignore-max-container"
-      style="right: 0"
+      style="right: 0; z-index: 999999999"
     >
       <van-tabbar-item replace to="/home">
         <span>Home</span>

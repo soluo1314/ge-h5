@@ -2,31 +2,26 @@
  * @Author: xyw
  * @Date: 2022-04-11 11:51:14
  * @LastEditors: xyw
- * @LastEditTime: 2022-04-15 18:03:13
+ * @LastEditTime: 2022-04-15 15:35:37
  * @Description: 
 -->
 <template>
   <div class="app-container">
-    <nav-bar back="true" content="My team"> </nav-bar>
-    <div class="w-100 zn-flex zn-ai-center zn-jc-center">
-      <div style="padding: 0.8rem 0 0; font-size: 1.2rem">Total：997</div>
-    </div>
+    <nav-bar back="true" content="Financial records"> </nav-bar>
     <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
       <div class="tablebox">
         <div class="table">
           <div class="tr zn-flex zn-ai-center w-100">
-            <div class="th">Avatar</div>
-            <div class="th">Account</div>
-            <div class="th">Level</div>
-            <div class="th">Register time</div>
+            <div class="th">Time</div>
+            <div class="th">Money</div>
+            <div class="th">Remark</div>
           </div>
           <div class="tr zn-flex zn-ai-center w-100" v-for="item in tableData" :key="item">
             <div class="td">
-              <img src="../../assets/images/home/women.png" alt="" />
+              <div>04-17 12:21:22</div>
             </div>
-            <div class="td">7014347891</div>
-            <div class="td">1</div>
-            <div class="td"> 04-15 15:02 </div>
+            <div class="td">+23.65</div>
+            <div class="td">Lottery</div>
           </div>
         </div>
       </div>
@@ -37,7 +32,7 @@
 <script>
   import NavBar from '@/components/NavBar'
   export default {
-    name: 'HomeTeams',
+    name: 'financial',
     components: {
       NavBar,
     },
@@ -45,7 +40,7 @@
       return {
         loading: false,
         finished: false,
-        tableData: [1, 2, 3, 4, 5, 6, 7, 8, 9],
+        tableData: [1, 2, 3, 4, 5],
       }
     },
   }
@@ -73,40 +68,31 @@
             text-align: center;
             font-weight: bold;
             &:nth-child(1) {
-              width: 15%;
+              width: 30%;
             }
             &:nth-child(2) {
-              width: 25%;
-            }
-            &:nth-child(3) {
               width: 15%;
             }
-            &:nth-child(4) {
+            &:nth-child(3) {
               flex: 1;
             }
           }
           .td {
             text-align: center;
             height: 2rem;
+            line-height: 2rem;
             font-size: 0.8rem;
             padding: 0.5rem 0.3rem;
             border-right: 1px solid #484848;
             border-bottom: 1px solid #484848;
             &:nth-child(1) {
-              width: 15%;
+              width: 30%;
             }
             &:nth-child(2) {
-              width: 25%;
-            }
-            &:nth-child(3) {
               width: 15%;
             }
-            &:nth-child(4) {
+            &:nth-child(3) {
               flex: 1;
-            }
-            img {
-              width: 1.5rem;
-              height: 1.5rem;
             }
           }
         }
