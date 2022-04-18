@@ -1,3 +1,10 @@
+/*
+ * @Description:
+ * @Author: lz
+ * @Date: 2022-04-17 14:38:53
+ * @LastEditTime: 2022-04-17 22:02:01
+ * @LastEditors: lz
+ */
 import axios from 'axios'
 import { Toast, Dialog } from 'vant'
 import store from '@/store'
@@ -6,6 +13,7 @@ import store from '@/store'
 // create an axios instance
 
 const service = axios.create({
+  // baseURL: 'https://api2.kk8898.co', // url = base url + request url
   baseURL: process.env.VUE_APP_API_URL, // url = base url + request url
   // withCredentials: true, // send cookies when cross-domain requests
   timeout: 60 * 1000, // request timeout 60s
@@ -44,7 +52,7 @@ service.interceptors.response.use(
    */
   (response) => {
     const res = response.data
-    if (res.code !== 200) {
+    if (res.code !== 1) {
       if (res.code === 401) {
         Dialog.confirm({
           title: '提示',
@@ -67,7 +75,7 @@ service.interceptors.response.use(
             // on cancel
           })
       } else {
-        Toast.fail(res.msg || 'Error')
+        Toast.fail(res.info || 'Error')
       }
       return Promise.reject(res)
     } else {
