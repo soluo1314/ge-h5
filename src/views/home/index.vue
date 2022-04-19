@@ -1,8 +1,8 @@
 <!--
  * @Author: xyw
  * @Date: 2022-04-11 11:51:14
- * @LastEditors: xyw
- * @LastEditTime: 2022-04-18 09:24:25
+ * @LastEditors: lz
+ * @LastEditTime: 2022-04-19 19:47:09
  * @Description: 
 -->
 <template>
@@ -106,17 +106,19 @@
         password: 'gsdfgsfd12df',
         // captcha_id: 'dbc84a6506f5ddc5',
         // vcode: '3273',
-      }).then((res) => {
+      }).then(async (res) => {
         console.log(res)
         if (res.code) {
-          this.getHomeData()
+          await this.$store.commit('user/SET_TOKEN', res.data.token)
+          await this.getHomeData()
         }
       })
     },
     methods: {
       async getHomeData() {
         const res = await getHome()
-        console.log(res)
+        // console.log(res.data.token)
+        this.$store.commit('user/SET_TOKEN', res.data.token)
       },
     },
   }
