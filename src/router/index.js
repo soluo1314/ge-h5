@@ -2,7 +2,7 @@
  * @Description:
  * @Author: lz
  * @Date: 2022-04-14 22:08:14
- * @LastEditTime: 2022-04-14 22:10:05
+ * @LastEditTime: 2022-04-19 22:14:13
  * @LastEditors: lz
  */
 import Vue from 'vue'
@@ -13,9 +13,9 @@ import { basicRoutes } from './modules/index'
 
 const createRouter = () =>
   new VueRouter({
-    // mode: 'history', // require service support
+    mode: 'history', // require service support
     scrollBehavior: () => ({ y: 0 }),
-    baseUrl: '/h5',
+    base: '/h5',
     routes: basicRoutes,
   })
 

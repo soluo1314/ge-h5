@@ -1,6 +1,5 @@
 import storage from '@/utils/storage'
-
-const TOKEN_KEY = 'token'
+const TOKEN_KEY = 'GeToken'
 
 export function getToken() {
   return storage.get(TOKEN_KEY)

@@ -2,7 +2,7 @@
  * @Description:
  * @Author: lz
  * @Date: 2022-04-17 14:38:53
- * @LastEditTime: 2022-04-19 19:13:11
+ * @LastEditTime: 2022-04-19 22:21:11
  * @LastEditors: lz
  */
 import axios from 'axios'
@@ -79,7 +79,7 @@ service.interceptors.response.use(
       }
       return Promise.reject(res)
     } else {
-      return res
+      return Promise.resolve(res)
     }
   },
   (error) => {

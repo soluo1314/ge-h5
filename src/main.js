@@ -1,8 +1,16 @@
+/*
+ * @Description:
+ * @Author: lz
+ * @Date: 2022-04-18 14:03:39
+ * @LastEditTime: 2022-04-19 20:46:07
+ * @LastEditors: lz
+ */
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
 
+import './permission.js'
 // svg icon
 import './assets/svg/index.js'
 

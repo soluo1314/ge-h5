@@ -2,7 +2,7 @@
  * @Author: xyw
  * @Date: 2022-04-11 11:51:14
  * @LastEditors: lz
- * @LastEditTime: 2022-04-19 19:47:09
+ * @LastEditTime: 2022-04-19 20:44:05
  * @Description: 
 -->
 <template>
@@ -94,31 +94,18 @@
 
 <script>
   import { getHome } from '@/api/homeApi'
-  import { login } from '@/api/userApi'
   export default {
     name: 'Home',
     data() {
       return {}
     },
     mounted() {
-      login({
-        account: '111111111',
-        password: 'gsdfgsfd12df',
-        // captcha_id: 'dbc84a6506f5ddc5',
-        // vcode: '3273',
-      }).then(async (res) => {
-        console.log(res)
-        if (res.code) {
-          await this.$store.commit('user/SET_TOKEN', res.data.token)
-          await this.getHomeData()
-        }
-      })
+      this.getHomeData()
     },
     methods: {
       async getHomeData() {
         const res = await getHome()
-        // console.log(res.data.token)
-        this.$store.commit('user/SET_TOKEN', res.data.token)
+        console.log(res)
       },
     },
   }
