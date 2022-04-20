@@ -1,8 +1,8 @@
 <!--
  * @Author: xyw
  * @Date: 2022-04-11 11:51:14
- * @LastEditors: lz
- * @LastEditTime: 2022-04-19 20:44:05
+ * @LastEditors: xyw
+ * @LastEditTime: 2022-04-20 09:09:36
  * @Description: 
 -->
 <template>
@@ -105,6 +105,7 @@
     methods: {
       async getHomeData() {
         const res = await getHome()
+
         console.log(res)
       },
     },
