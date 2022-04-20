@@ -31,7 +31,7 @@ module.exports = {
     },
     proxy: {
       '/api': {
-        target: process.env.VUE_APP_API_URL,
+        target: 'https://api2.kk8898.co',
         changeOrigin: true, //是否跨域
         // pathRewrite: {
         //   '^/web': '',

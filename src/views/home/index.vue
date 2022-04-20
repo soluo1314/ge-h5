@@ -1,8 +1,8 @@
 <!--
  * @Author: xyw
  * @Date: 2022-04-11 11:51:14
- * @LastEditors: xyw
- * @LastEditTime: 2022-04-18 09:24:25
+ * @LastEditors: lz
+ * @LastEditTime: 2022-04-19 20:44:05
  * @Description: 
 -->
 <template>
@@ -94,24 +94,13 @@
 
 <script>
   import { getHome } from '@/api/homeApi'
-  import { login } from '@/api/userApi'
   export default {
     name: 'Home',
     data() {
       return {}
     },
     mounted() {
-      login({
-        account: '111111111',
-        password: 'gsdfgsfd12df',
-        // captcha_id: 'dbc84a6506f5ddc5',
-        // vcode: '3273',
-      }).then((res) => {
-        console.log(res)
-        if (res.code) {
-          this.getHomeData()
-        }
-      })
+      this.getHomeData()
     },
     methods: {
       async getHomeData() {

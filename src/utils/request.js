@@ -2,7 +2,7 @@
  * @Description:
  * @Author: lz
  * @Date: 2022-04-17 14:38:53
- * @LastEditTime: 2022-04-17 22:02:01
+ * @LastEditTime: 2022-04-19 22:21:11
  * @LastEditors: lz
  */
 import axios from 'axios'
@@ -27,7 +27,7 @@ service.interceptors.request.use(
       // let each request carry token
       // ['X-Token'] is a custom headers key
       // please modify it according to the actual situation
-      config.headers['Authorization'] = 'Bearer ' + store.getters.token
+      config.headers['token'] = store.getters.token
     }
     return config
   },
@@ -79,7 +79,7 @@ service.interceptors.response.use(
       }
       return Promise.reject(res)
     } else {
-      return res
+      return Promise.resolve(res)
     }
   },
   (error) => {

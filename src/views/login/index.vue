@@ -1,63 +1,85 @@
 <!--
  * @Author: xyw
  * @Date: 2022-04-11 11:51:14
- * @LastEditors: xyw
- * @LastEditTime: 2022-04-14 14:16:34
+ * @LastEditors: lz
+ * @LastEditTime: 2022-04-19 22:23:58
  * @Description: 
 -->
 <template>
   <div class="app-container">
-    <div class="box">
-      <div class="zn-bold zn-text-ct zn-mb-2">Sign in</div>
-
-      <div class="item">
-        <img src="../../assets/images/login/phone.png" alt="" />
-        <div class="zn-flex-1">
-          <van-field
-            class="fieldbox"
-            v-model="value"
-            placeholder="Please enter your phone number to log in"
+    <van-form @submit="onSubmit">
+      <div class="box">
+        <div class="zn-bold zn-text-ct zn-mb-2">Sign in</div>
+        <div class="item">
+          <img src="../../assets/images/login/phone.png" alt="" />
+          <div class="zn-flex-1">
+            <van-field
+              class="fieldbox"
+              v-model="account"
+              placeholder="Please enter your phone number to log in"
+              :rules="[{ required: true, message: 'Please enter your phone number to log in' }]"
+            />
+          </div>
+        </div>
+        <div class="item">
+          <img src="../../assets/images/login/password.png" alt="" />
+          <div class="zn-flex-1">
+            <van-field
+              class="fieldbox"
+              type="password"
+              v-model="password"
+              placeholder="Please enter the login password"
+              :rules="[{ required: true, message: 'Please enter the login password' }]"
+            />
+          </div>
+        </div>
+        <div class="item">
+          <img src="../../assets/images/login/code.png" alt="" />
+          <div class="zn-flex-1">
+            <van-field class="fieldbox" v-model="vcode" placeholder="Graphic verification code" />
+          </div>
+          <img
+            style="width: 5rem; height: 2.2rem; margin-right: -4.266667vw"
+            src="../../assets/images/login/yzm.jpg"
+            alt=""
           />
         </div>
-      </div>
-      <div class="item">
-        <img src="../../assets/images/login/password.png" alt="" />
-        <div class="zn-flex-1">
-          <van-field
-            class="fieldbox"
-            type="password"
-            v-model="value"
-            placeholder="Please enter the login password"
-          />
+        <div class="zn-flex zn-ai-center zn-jc-between">
+          <div @click="$router.push('/register')" class="zn-text-orange">Register now</div>
+          <div @click="$router.push('/forget')">Forget password？</div>
         </div>
       </div>
-      <div class="item">
-        <img src="../../assets/images/login/code.png" alt="" />
-        <div class="zn-flex-1">
-          <van-field class="fieldbox" v-model="value" placeholder="Graphic verification code" />
-        </div>
-        <img
-          style="width: 5rem; height: 2.2rem; margin-right: -4.266667vw"
-          src="../../assets/images/login/yzm.jpg"
-          alt=""
-        />
+      <div class="btn zn-flex zn-ai-center zn-jc-center">
+        <van-button round block type="info" native-type="submit">Sign in</van-button>
       </div>
-      <div class="zn-flex zn-ai-center zn-jc-between">
-        <div @click="$router.push('/register')" class="zn-text-orange">Register now</div>
-        <div @click="$router.push('/forget')">Forget password？</div>
-      </div>
-    </div>
-    <div class="btn zn-flex zn-ai-center zn-jc-center">
-      <div>Sign in</div>
-    </div>
+    </van-form>
   </div>
 </template>
 
 <script>
+  import { mapActions } from 'vuex'
   export default {
     name: 'login',
     data() {
-      return {}
+      return {
+        account: '111111111',
+        password: 'gsdfgsfd12df',
+        captcha_id: '',
+        vcode: '',
+      }
+    },
+    methods: {
+      ...mapActions({ A_LOGIN: 'user/A_LOGIN' }),
+      async onSubmit(values) {
+        console.log('submit', values)
+        await this.A_LOGIN({
+          account: this.account,
+          password: this.password,
+          // captcha_id: 'dbc84a6506f5ddc5',
+          // vcode: '3273',
+        })
+        await this.$router.push('/')
+      },
     },
   }
 </script>
@@ -95,13 +117,15 @@
       }
     }
     .btn {
-      background-color: #ee0a24;
-      border-color: #ee0a24;
-      width: 92%;
-      height: 2.8rem;
-      margin: 1.5rem auto 0;
-      padding: 0;
-      font-size: 1.1rem;
+      > .van-button {
+        background-color: #ee0a24;
+        border-color: #ee0a24;
+        width: 92%;
+        height: 2.8rem;
+        margin: 1.5rem auto 0;
+        padding: 0;
+        font-size: 1.1rem;
+      }
     }
   }
 </style>

@@ -1,8 +1,8 @@
 /*
  * @Author: xyw
  * @Date: 2022-04-11 11:51:14
- * @LastEditors: xyw
- * @LastEditTime: 2022-04-15 15:33:35
+ * @LastEditors: lz
+ * @LastEditTime: 2022-04-19 20:39:57
  * @Description:
  */
 import Vue from 'vue'
@@ -14,6 +14,7 @@ import {
   SwipeItem,
   NoticeBar,
   Icon,
+  Form,
   Field,
   RadioGroup,
   Radio,
@@ -29,6 +30,7 @@ Vue.use(Swipe)
 Vue.use(SwipeItem)
 Vue.use(NoticeBar)
 Vue.use(Icon)
+Vue.use(Form)
 Vue.use(Field)
 Vue.use(RadioGroup)
 Vue.use(Radio)
