@@ -2,7 +2,7 @@
  * @Author: xyw
  * @Date: 2022-04-11 11:51:14
  * @LastEditors: xyw
- * @LastEditTime: 2022-04-20 09:09:36
+ * @LastEditTime: 2022-04-20 17:43:23
  * @Description: 
 -->
 <template>
@@ -12,11 +12,18 @@
         <div class="headbox zn-jc-between">
           <div class="zn-flex zn-ai-center">
             <van-image
+              v-if="userInfo.headimgurl"
               class="logo"
               @click="$router.push('/me')"
-              src="https://img01.yzcdn.cn/vant/cat.jpeg"
+              :src="userInfo.headimgurl"
             />
-            <div style="padding-left: 0.5rem">gz2002</div>
+            <van-image
+              v-else
+              class="logo"
+              @click="$router.push('/me')"
+              src="../../assets/images/home/user.png"
+            />
+            <div style="padding-left: 0.5rem">{{ userInfo.nickname }}</div>
           </div>
           <img
             class="logo"
@@ -29,8 +36,8 @@
           style="height: 12rem; border-radius: 0.5rem"
           indicator-color="#fff"
         >
-          <van-swipe-item v-for="item in [1, 2, 3]" :key="item">
-            <img src="../../assets/images/home/swiper.png" />
+          <van-swipe-item v-for="(item, index) in FormData.kv" :key="index + item.cover">
+            <img :src="item.cover" />
           </van-swipe-item>
         </van-swipe>
       </div>
@@ -53,11 +60,7 @@
             <div class="text">Invitation link</div>
           </div>
         </div>
-        <van-notice-bar
-          style="margin-bottom: 1rem"
-          color="#fff"
-          text="Congratulations: user got 1687RS at 91*****357"
-        >
+        <van-notice-bar style="margin-bottom: 1rem" color="#fff" :text="FormData.noticeText">
           <template #left-icon>
             <img
               style="width: 1rem; height: 1rem; margin-right: 0.5rem"
@@ -66,24 +69,19 @@
           </template>
         </van-notice-bar>
         <div>
-          <video
-            autoplay
-            controls
-            class="w-100"
-            src="https://ge.tianbo8.top/public/video/video.mp4"
-          ></video>
+          <video autoplay controls class="w-100" :src="FormData.video.url"></video>
         </div>
         <div class="newsbox">
           <div class="titbox"><p>News information</p><i class="line"></i></div>
           <div class="listbox">
             <div
               class="item"
-              v-for="item in [4, 5, 6, 7]"
-              :key="item"
+              v-for="item in FormData.news"
+              :key="item.id"
               @click="$router.push('/home/newsdetail')"
             >
-              <p>good news good news</p>
-              <img src="../../assets/images/home/women.png" />
+              <p>{{ item.title }}</p>
+              <img :src="item.cover" />
             </div>
           </div>
         </div>
@@ -97,15 +95,39 @@
   export default {
     name: 'Home',
     data() {
-      return {}
+      return {
+        FormData: {
+          kv: [],
+          news: [],
+          notice: [],
+          video: {},
+        },
+      }
     },
     mounted() {
       this.getHomeData()
     },
+    computed: {
+      userInfo() {
+        return JSON.parse(this.$store.getters.userInfo)
+      },
+    },
     methods: {
       async getHomeData() {
         const res = await getHome()
-
+        this.FormData = res.data
+        //处理图片路劲
+        this.FormData.kv.map((n) => {
+          n.cover = process.env.VUE_APP_PIC_URL + n.cover.replace('/public', '')
+        })
+        this.FormData.news.map((n) => {
+          n.cover = process.env.VUE_APP_PIC_URL + n.cover.replace('/public', '')
+        })
+        //处理消息通知
+        this.FormData.noticeText = this.FormData.notice.reduce(
+          (pre, curr) => pre + '   ' + curr.title,
+          ''
+        )
         console.log(res)
       },
     },

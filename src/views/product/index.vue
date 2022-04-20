@@ -2,7 +2,7 @@
  * @Author: xyw
  * @Date: 2022-04-11 11:51:14
  * @LastEditors: xyw
- * @LastEditTime: 2022-04-14 10:53:14
+ * @LastEditTime: 2022-04-20 18:02:24
  * @Description: 
 -->
 <template>
@@ -10,47 +10,50 @@
     <nav-bar content="Medical equipment"></nav-bar>
     <div class="product_wrap">
       <div class="pBox">
-        <div class="pItem" v-for="item in [4, 5, 6, 7, 8, 9]" :key="item">
-          <img src="../../assets/images/product/item.jpg" alt="" />
-          <div class="pro_name zn-flex zn-ai-center">
-            <img class="touxiang" src="../../assets/images/product/item.jpg" alt="" />
-            <div> Ultrasound</div>
-          </div>
-          <div class="zn-flex desc">
-            <div class="zn-flex-1 zn-flex zn-jc-center zn-ai-center zn-flex-wrap">
-              <div class="zn-text-orange">550</div>
-              <div class="w-100 zn-text-ct">Price (₹)</div>
+        <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="load">
+          <div class="pItem" v-for="item in list" :key="item.cid">
+            <img :src="item.covers" alt="" />
+            <div class="pro_name zn-flex zn-ai-center">
+              <img class="touxiang" :src="item.covers" alt="" />
+              <div> {{ item.name }}</div>
             </div>
-            <div class="zn-flex-1 zn-flex zn-jc-center zn-ai-center zn-flex-wrap">
-              <div class="zn-text-orange">4.3</div>
-              <div class="w-100 zn-text-ct">Day yield (%)</div>
-            </div>
-            <div class="zn-flex-1 zn-flex zn-jc-center zn-ai-center zn-flex-wrap">
-              <div class="zn-text-orange">45</div>
-              <div class="w-100 zn-text-ct">Term (days)</div>
-            </div>
-          </div>
-          <div class="pro_info zn-flex zn-ai-center zn-jc-between">
-            <div class="pro_desc">
-              <div>
-                Restricted quantity：
-                <span class="zn-text-orange">10</span>
+            <div class="zn-flex desc">
+              <div class="zn-flex-1 zn-flex zn-jc-center zn-ai-center zn-flex-wrap">
+                <div class="zn-text-orange">{{ item.price }}</div>
+                <div class="w-100 zn-text-ct">Price (₹)</div>
               </div>
-              <div>Medical equipment</div>
+              <div class="zn-flex-1 zn-flex zn-jc-center zn-ai-center zn-flex-wrap">
+                <div class="zn-text-orange">{{ item.rate }}</div>
+                <div class="w-100 zn-text-ct">Day yield (%)</div>
+              </div>
+              <div class="zn-flex-1 zn-flex zn-jc-center zn-ai-center zn-flex-wrap">
+                <div class="zn-text-orange">{{ item.days }}</div>
+                <div class="w-100 zn-text-ct">Term (days)</div>
+              </div>
             </div>
-            <div
-              class="btn zn-flex zn-ai-center zn-jc-center"
-              @click="$router.push('/product/detail')"
-              >Rent</div
-            >
+            <div class="pro_info zn-flex zn-ai-center zn-jc-between">
+              <div class="pro_desc">
+                <div>
+                  Restricted quantity：
+                  <span class="zn-text-orange">10</span>
+                </div>
+                <div>Medical equipment</div>
+              </div>
+              <div
+                class="btn zn-flex zn-ai-center zn-jc-center"
+                @click="$router.push('/product/detail')"
+                >Rent</div
+              >
+            </div>
           </div>
-        </div>
+        </van-list>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+  import { plist } from '@/api/prodcutApi'
   import NavBar from '@/components/NavBar'
   export default {
     name: 'Product',
@@ -58,7 +61,28 @@
       NavBar,
     },
     data() {
-      return {}
+      return {
+        page: 1,
+        list: [],
+        loading: false,
+        finished: false,
+      }
+    },
+    methods: {
+      async getList() {
+        const res = await plist({ page: this.page })
+        res.data.list.map((n) => {
+          n.covers = process.env.VUE_APP_PIC_URL + n.covers[0].replace('/public', '')
+        })
+        this.finished = res.data.finished
+        this.list = [...this.list, ...res.data.list]
+        this.page = res.data.page
+        this.loading = false
+      },
+      load() {
+        this.loading = true
+        this.getList()
+      },
     },
   }
 </script>
