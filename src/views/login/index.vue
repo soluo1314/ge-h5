@@ -2,7 +2,7 @@
  * @Author: xyw
  * @Date: 2022-04-11 11:51:14
  * @LastEditors: lz
- * @LastEditTime: 2022-04-19 22:23:58
+ * @LastEditTime: 2022-04-21 20:29:23
  * @Description: 
 -->
 <template>
@@ -40,8 +40,9 @@
           </div>
           <img
             style="width: 5rem; height: 2.2rem; margin-right: -4.266667vw"
-            src="../../assets/images/login/yzm.jpg"
+            :src="yzmCode"
             alt=""
+            @click="getCode"
           />
         </div>
         <div class="zn-flex zn-ai-center zn-jc-between">
@@ -58,6 +59,7 @@
 
 <script>
   import { mapActions } from 'vuex'
+  import { getVcode } from '@/api/userApi'
   export default {
     name: 'login',
     data() {
@@ -66,6 +68,7 @@
         password: 'gsdfgsfd12df',
         captcha_id: '',
         vcode: '',
+        yzmCode: require('../../assets/images/login/yzm.jpg'),
       }
     },
     methods: {
@@ -75,10 +78,15 @@
         await this.A_LOGIN({
           account: this.account,
           password: this.password,
-          // captcha_id: 'dbc84a6506f5ddc5',
-          // vcode: '3273',
+          captcha_id: this.captcha_id,
+          vcode: this.vcode,
         })
-        await this.$router.push('/')
+        this.$router.push('/')
+      },
+      async getCode() {
+        const res = await getVcode()
+        this.captcha_id = res.data.captcha_id
+        this.yzmCode = res.data.image
       },
     },
   }
