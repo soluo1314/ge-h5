@@ -2,7 +2,7 @@
  * @Author: xyw
  * @Date: 2022-04-11 11:51:14
  * @LastEditors: xyw
- * @LastEditTime: 2022-04-14 20:00:24
+ * @LastEditTime: 2022-04-21 19:04:41
  * @Description: 
 -->
 <template>
@@ -75,9 +75,9 @@
     },
   }
 </script>
-<style>
+<style scoped>
   .van-field__control {
-    color: #fff;
+    color: #fff !important;
   }
 </style>
 <style lang="scss" scoped>
@@ -100,6 +100,11 @@
           padding: 0.4rem 0.5rem;
           // margin-top: 0.5rem;
           border-radius: 0.3rem;
+          .van-field__value {
+            input.van-field__control {
+              color: #fff !important;
+            }
+          }
         }
       }
     }

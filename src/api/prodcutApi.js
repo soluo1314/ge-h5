@@ -2,7 +2,7 @@
  * @Author: xyw
  * @Date: 2022-04-20 17:25:35
  * @LastEditors: xyw
- * @LastEditTime: 2022-04-20 17:51:13
+ * @LastEditTime: 2022-04-21 16:02:02
  * @Description:
  */
 import request from '../utils/request.js'
@@ -15,23 +15,26 @@ export function plist(params) {
   })
 }
 //产品详情
-export function goods() {
+export function goods(params) {
   return request({
     method: 'get',
     url: '/api/product/goods',
+    params,
   })
 }
 //我的产品
-export function order() {
+export function order(params) {
   return request({
     method: 'get',
     url: '/api/product/order',
+    params,
   })
 }
 //产品购买
-export function invest() {
+export function invest(data) {
   return request({
     method: 'post',
     url: '/api/product/invest',
+    data,
   })
 }

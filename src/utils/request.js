@@ -2,13 +2,13 @@
  * @Description:
  * @Author: lz
  * @Date: 2022-04-17 14:38:53
- * @LastEditTime: 2022-04-19 22:21:11
- * @LastEditors: lz
+ * @LastEditTime: 2022-04-21 15:21:04
+ * @LastEditors: xyw
  */
 import axios from 'axios'
-import { Toast, Dialog } from 'vant'
+import { Toast } from 'vant'
 import store from '@/store'
-// import router from '@/router'
+import router from '@/router'
 
 // create an axios instance
 
@@ -53,27 +53,30 @@ service.interceptors.response.use(
   (response) => {
     const res = response.data
     if (res.code !== 1) {
-      if (res.code === 401) {
-        Dialog.confirm({
-          title: '提示',
-          message: '登录已过期，请重新登录',
-        })
-          .then(() => {
-            // on confirm
-            store
-              .dispatch('user/LogOut')
-              .then(() => {
-                location.reload()
-              })
-              .catch(() => {
-                store.dispatch('user/FedLogOut').then(() => {
-                  location.reload()
-                })
-              })
-          })
-          .catch(() => {
-            // on cancel
-          })
+      if (res.code === -98) {
+        // Dialog.confirm({
+        //   title: '提示',
+        //   message: '登录已过期，请重新登录',
+        // })
+        //   .then(() => {
+        //     // on confirm
+        //     store
+        //       .dispatch('user/LogOut')
+        //       .then(() => {
+        //         location.reload()
+        //       })
+        //       .catch(() => {
+        //         store.dispatch('user/FedLogOut').then(() => {
+        //           location.reload()
+        //         })
+        //       })
+        //     router.push('/login')
+        //   })
+        //   .catch(() => {
+        //     // on cancel
+        //   })
+        Toast.fail(res.info || 'Error')
+        router.push('/login')
       } else {
         Toast.fail(res.info || 'Error')
       }

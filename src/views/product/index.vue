@@ -2,7 +2,7 @@
  * @Author: xyw
  * @Date: 2022-04-11 11:51:14
  * @LastEditors: xyw
- * @LastEditTime: 2022-04-20 18:02:24
+ * @LastEditTime: 2022-04-21 13:49:42
  * @Description: 
 -->
 <template>
@@ -14,7 +14,7 @@
           <div class="pItem" v-for="item in list" :key="item.cid">
             <img :src="item.covers" alt="" />
             <div class="pro_name zn-flex zn-ai-center">
-              <img class="touxiang" :src="item.covers" alt="" />
+              <img class="touxiang" :src="item.icon" alt="" />
               <div> {{ item.name }}</div>
             </div>
             <div class="zn-flex desc">
@@ -35,13 +35,13 @@
               <div class="pro_desc">
                 <div>
                   Restricted quantity：
-                  <span class="zn-text-orange">10</span>
+                  <span class="zn-text-orange">{{ item.invest_limit }}</span>
                 </div>
-                <div>Medical equipment</div>
+                <div>{{ item.category_name }}</div>
               </div>
               <div
                 class="btn zn-flex zn-ai-center zn-jc-center"
-                @click="$router.push('/product/detail')"
+                @click="$router.push('/product/detail?id=' + item.cid)"
                 >Rent</div
               >
             </div>
@@ -73,6 +73,7 @@
         const res = await plist({ page: this.page })
         res.data.list.map((n) => {
           n.covers = process.env.VUE_APP_PIC_URL + n.covers[0].replace('/public', '')
+          n.icon = process.env.VUE_APP_PIC_URL + n.icon.replace('/public', '')
         })
         this.finished = res.data.finished
         this.list = [...this.list, ...res.data.list]

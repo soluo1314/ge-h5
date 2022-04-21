@@ -2,7 +2,7 @@
  * @Author: xyw
  * @Date: 2022-04-11 11:51:14
  * @LastEditors: xyw
- * @LastEditTime: 2022-04-14 14:16:34
+ * @LastEditTime: 2022-04-21 19:07:13
  * @Description: 
 -->
 <template>
@@ -10,29 +10,44 @@
     <nav-bar back="true" content="Redpack"> </nav-bar>
     <div class="wrap">
       <div class="code">
-        <van-field v-model="value" label="Code" placeholder="Please enter the redpack code" />
+        <van-field v-model="code" label="Code" placeholder="Please enter the redpack code" />
       </div>
       <div class="btn zn-flex zn-ai-center zn-jc-center">
-        <div>Receive</div>
+        <div @click="submit">Receive</div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+  import { redpackAct } from '@/api/prizeApi'
   import NavBar from '@/components/NavBar'
+  import { Toast } from 'vant'
   export default {
     name: 'redpack',
     components: {
       NavBar,
     },
     data() {
-      return {}
+      return {
+        code: '',
+      }
+    },
+    methods: {
+      async submit() {
+        const res = await redpackAct({
+          code: this.code,
+        })
+        Toast.success(res.info)
+      },
     },
   }
 </script>
 
 <style lang="scss" scoped>
+  v-deep .van-field__control {
+    color: #323232;
+  }
   .app-container {
     background: #0a0a0a;
     color: #fff;

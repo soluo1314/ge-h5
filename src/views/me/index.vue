@@ -2,54 +2,54 @@
  * @Author: xyw
  * @Date: 2022-04-11 11:51:14
  * @LastEditors: xyw
- * @LastEditTime: 2022-04-14 14:16:34
+ * @LastEditTime: 2022-04-21 19:46:29
  * @Description: 
 -->
 <template>
   <div class="app-container">
     <img class="set" @click="$router.push('/me/set')" src="../../assets/images/me/set.png" alt="" />
     <div class="head zn-flex zn-ai-center">
-      <img src="../../assets/images/home/women.png" alt="" />
+      <img :src="FormData.user.headimgurl" alt="" />
       <div>
-        <div>gz2002</div>
-        <div style="padding-top: 0.2rem">ID:211855</div>
+        <div>{{ FormData.user.nickname }}</div>
+        <div style="padding-top: 0.2rem">ID:{{ FormData.user.id }}</div>
       </div>
     </div>
     <div class="tab1 zn-flex zn-ai-center">
       <div class="zn-flex-1">
-        <div>0.00</div>
+        <div>{{ FormData.wallet.balance }}</div>
         <div>Recharge Wallet</div>
       </div>
       <div class="zn-flex-1">
-        <div>566.59</div>
+        <div>{{ FormData.wallet2.balance }}</div>
         <div>Balance Wallet</div>
       </div>
     </div>
     <div class="tab2 zn-flex zn-ai-center zn-mt-1">
       <div class="zn-flex-1">
-        <div>691.90</div>
+        <div>{{ FormData.reward }}</div>
         <div>Profit</div>
       </div>
       <div class="zn-flex-1">
-        <div>0</div>
+        <div>{{ FormData.rebate }}</div>
         <div>Commission</div>
       </div>
       <div class="zn-flex-1">
-        <div>23.65</div>
+        <div>{{ FormData.tprofit }}</div>
         <div>Today Profit</div>
       </div>
     </div>
     <div class="tab2 zn-flex zn-ai-center">
       <div class="zn-flex-1">
-        <div>550</div>
+        <div>{{ FormData.investment }}</div>
         <div>Products</div>
       </div>
       <div class="zn-flex-1">
-        <div>0</div>
+        <div>{{ FormData.recharge }}</div>
         <div>Recharge</div>
       </div>
       <div class="zn-flex-1">
-        <div>0</div>
+        <div>{{ FormData.withdraw }}</div>
         <div>Withdraw</div>
       </div>
     </div>
@@ -76,6 +76,7 @@
   import icon4 from '../../assets/images/me/icon4.png'
   import icon5 from '../../assets/images/me/icon5.png'
   import icon6 from '../../assets/images/me/icon6.png'
+  import { me } from '@/api/meApi'
   export default {
     name: 'Me',
     data() {
@@ -112,7 +113,27 @@
             icon: icon6,
           },
         ],
+        FormData: {
+          user: {},
+          wallet: {},
+          wallet2: {},
+          investment: 0,
+          recharge: 0,
+          withdraw: 0,
+          reward: '',
+          rebate: 0,
+          tprofit: 0,
+        },
       }
+    },
+    mounted() {
+      this.getList()
+    },
+    methods: {
+      async getList() {
+        const res = await me()
+        this.FormData = res.data
+      },
     },
   }
 </script>
@@ -136,6 +157,7 @@
         border: 0.15rem solid #fff;
         border-radius: 50%;
         margin-right: 0.8rem;
+        overflow: hidden;
       }
       div {
         font-size: 0.95rem;

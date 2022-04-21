@@ -2,16 +2,16 @@
  * @Author: xyw
  * @Date: 2022-04-11 11:51:14
  * @LastEditors: xyw
- * @LastEditTime: 2022-04-15 18:03:13
+ * @LastEditTime: 2022-04-21 19:18:23
  * @Description: 
 -->
 <template>
   <div class="app-container">
     <nav-bar back="true" content="My team"> </nav-bar>
     <div class="w-100 zn-flex zn-ai-center zn-jc-center">
-      <div style="padding: 0.8rem 0 0; font-size: 1.2rem">Total：997</div>
+      <div style="padding: 0.8rem 0 0; font-size: 1.2rem">Total：{{ total }}</div>
     </div>
-    <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
+    <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="load">
       <div class="tablebox">
         <div class="table">
           <div class="tr zn-flex zn-ai-center w-100">
@@ -20,13 +20,17 @@
             <div class="th">Level</div>
             <div class="th">Register time</div>
           </div>
-          <div class="tr zn-flex zn-ai-center w-100" v-for="item in tableData" :key="item">
+          <div
+            class="tr zn-flex zn-ai-center w-100"
+            v-for="(item, index) in list"
+            :key="item.account + index"
+          >
             <div class="td">
-              <img src="../../assets/images/home/women.png" alt="" />
+              <img :src="item.headimgurl" alt="" />
             </div>
-            <div class="td">7014347891</div>
-            <div class="td">1</div>
-            <div class="td"> 04-15 15:02 </div>
+            <div class="td">{{ item.account }}</div>
+            <div class="td">{{ item.level }}</div>
+            <div class="td">{{ item.reg_time }} </div>
           </div>
         </div>
       </div>
@@ -36,6 +40,7 @@
 
 <script>
   import NavBar from '@/components/NavBar'
+  import { team } from '@/api/homeApi'
   export default {
     name: 'HomeTeams',
     components: {
@@ -45,8 +50,26 @@
       return {
         loading: false,
         finished: false,
-        tableData: [1, 2, 3, 4, 5, 6, 7, 8, 9],
+        list: [],
+        page: 1,
+        total: 0,
       }
+    },
+    methods: {
+      async getList() {
+        const res = await team({
+          page: this.page,
+        })
+        this.finished = res.data.finished
+        this.list = [...this.list, ...res.data.list]
+        this.page = res.data.page
+        this.total = res.data.count
+        this.loading = false
+      },
+      load() {
+        this.loading = true
+        this.getList()
+      },
     },
   }
 </script>

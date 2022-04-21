@@ -1,8 +1,8 @@
 /*
  * @Author: xyw
  * @Date: 2022-04-11 11:51:14
- * @LastEditors: lz
- * @LastEditTime: 2022-04-19 20:39:57
+ * @LastEditors: xyw
+ * @LastEditTime: 2022-04-21 16:54:52
  * @Description:
  */
 import Vue from 'vue'
@@ -22,6 +22,9 @@ import {
   Cell,
   CellGroup,
   Uploader,
+  Popup,
+  Stepper,
+  Dialog,
 } from 'vant'
 Vue.use(Button)
 Vue.use(Toast)
@@ -38,3 +41,6 @@ Vue.use(List)
 Vue.use(Cell)
 Vue.use(CellGroup)
 Vue.use(Uploader)
+Vue.use(Popup)
+Vue.use(Stepper)
+Vue.use(Dialog)
