@@ -1,69 +1,95 @@
 <!--
  * @Author: xyw
  * @Date: 2022-04-11 11:51:14
- * @LastEditors: xyw
- * @LastEditTime: 2022-04-14 14:16:34
+ * @LastEditors: lz
+ * @LastEditTime: 2022-04-21 20:32:47
  * @Description: 
 -->
 <template>
   <div class="app-container">
-    <div class="box">
-      <div class="zn-bold zn-text-ct zn-mb-2">Sign in</div>
+    <van-form @submit="onSubmit">
+      <div class="box">
+        <div class="zn-bold zn-text-ct zn-mb-2">Sign in</div>
 
-      <div class="item">
-        <img src="../../assets/images/login/phone.png" alt="" />
-        <div class="zn-flex-1">
-          <van-field
-            class="fieldbox"
-            v-model="value"
-            placeholder="Please enter your phone number to log in"
-          />
+        <div class="item">
+          <img src="../../assets/images/login/phone.png" alt="" />
+          <div class="zn-flex-1">
+            <van-field
+              class="fieldbox"
+              v-model="account"
+              placeholder="Please enter your phone number to log in"
+              :rules="[{ required: true, message: 'Please enter your phone number to log in' }]"
+            />
+          </div>
+        </div>
+        <div class="item">
+          <img src="../../assets/images/login/password.png" alt="" />
+          <div class="zn-flex-1">
+            <van-field
+              class="fieldbox"
+              type="password"
+              v-model="password"
+              placeholder="Please enter the login password"
+              :rules="[{ required: true, message: 'Please enter the login password' }]"
+            />
+          </div>
+        </div>
+        <div class="item">
+          <van-icon name="envelop-o" />
+          <div class="zn-flex-1">
+            <van-field class="fieldbox" v-model="imgcode" placeholder="SMS verification code" />
+          </div>
+          <div class="send zn-flex zn-ai-center zn-jc-center" @click="getCode">Send</div>
+        </div>
+        <div class="item">
+          <img src="../../assets/images/login/people.png" alt="" />
+          <div class="zn-flex-1">
+            <van-field
+              class="fieldbox"
+              v-model="icode"
+              placeholder="Please enter the invitation code"
+            />
+          </div>
+        </div>
+        <div class="zn-flex zn-ai-center zn-jc-end">
+          <div>Have an account？</div>
+          <div @click="$router.push('/login')" class="zn-text-orange">Sign in now</div>
         </div>
       </div>
-      <div class="item">
-        <img src="../../assets/images/login/password.png" alt="" />
-        <div class="zn-flex-1">
-          <van-field
-            class="fieldbox"
-            type="password"
-            v-model="value"
-            placeholder="Please enter the login password"
-          />
-        </div>
-      </div>
-      <div class="item">
-        <van-icon name="envelop-o" />
-        <div class="zn-flex-1">
-          <van-field class="fieldbox" v-model="value" placeholder="SMS verification code" />
-        </div>
-        <div class="send zn-flex zn-ai-center zn-jc-center">Send</div>
-      </div>
-      <div class="item">
-        <img src="../../assets/images/login/people.png" alt="" />
-        <div class="zn-flex-1">
-          <van-field
-            class="fieldbox"
-            v-model="value"
-            placeholder="Please enter the invitation code"
-          />
-        </div>
-      </div>
-      <div class="zn-flex zn-ai-center zn-jc-end">
-        <div>Have an account？</div>
-        <div @click="$router.push('/login')" class="zn-text-orange">Sign in now</div>
-      </div>
-    </div>
+    </van-form>
     <div class="btn zn-flex zn-ai-center zn-jc-center">
-      <div>Sign in</div>
+      <van-button round block type="info" native-type="submit">Sign up</van-button>
     </div>
   </div>
 </template>
 
 <script>
+  import { register, getVcode } from '@/api/userApi'
   export default {
     name: 'register',
     data() {
-      return {}
+      return {
+        account: '',
+        password: '',
+        captcha_id: '',
+        imgcode: '',
+        icode: '',
+      }
+    },
+    methods: {
+      async onSubmit() {
+        await register({
+          account: this.account,
+          password: this.password,
+          captcha_id: this.captcha_id,
+          vcode: this.vcode,
+        })
+        this.$router.push('/')
+      },
+      async getCode() {
+        const res = await getVcode()
+        this.captcha_id = res.data.captcha_id
+      },
     },
   }
 </script>
@@ -111,13 +137,15 @@
       }
     }
     .btn {
-      background-color: #ee0a24;
-      border-color: #ee0a24;
-      width: 92%;
-      height: 2.8rem;
-      margin: 1.5rem auto 0;
-      padding: 0;
-      font-size: 1.1rem;
+      > .van-button {
+        background-color: #ee0a24;
+        border-color: #ee0a24;
+        width: 92%;
+        height: 2.8rem;
+        margin: 1.5rem auto 0;
+        padding: 0;
+        font-size: 1.1rem;
+      }
     }
   }
 </style>
