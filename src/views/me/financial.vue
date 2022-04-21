@@ -2,13 +2,13 @@
  * @Author: xyw
  * @Date: 2022-04-11 11:51:14
  * @LastEditors: xyw
- * @LastEditTime: 2022-04-21 19:54:18
+ * @LastEditTime: 2022-04-21 20:19:10
  * @Description: 
 -->
 <template>
   <div class="app-container">
     <nav-bar back="true" content="Financial records"> </nav-bar>
-    <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
+    <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="load">
       <div class="tablebox">
         <div class="table">
           <div class="tr zn-flex zn-ai-center w-100">
@@ -16,12 +16,12 @@
             <div class="th">Money</div>
             <div class="th">Remark</div>
           </div>
-          <div class="tr zn-flex zn-ai-center w-100" v-for="item in tableData" :key="item">
+          <div class="tr zn-flex zn-ai-center w-100" v-for="(item, index) in list" :key="index">
             <div class="td">
-              <div>04-17 12:21:22</div>
+              <div>{{ item.create_time }}</div>
             </div>
-            <div class="td">+23.65</div>
-            <div class="td">Lottery</div>
+            <div class="td">{{ item.money }}</div>
+            <div class="td">{{ item.remark }}</div>
           </div>
         </div>
       </div>
@@ -31,6 +31,7 @@
 
 <script>
   import NavBar from '@/components/NavBar'
+  import { balancelog } from '@/api/meApi'
   export default {
     name: 'financial',
     components: {
@@ -40,8 +41,24 @@
       return {
         loading: false,
         finished: false,
-        tableData: [1, 2, 3, 4, 5],
+        page: 1,
+        list: [],
       }
+    },
+    methods: {
+      async getList() {
+        const res = await balancelog({
+          page: this.page,
+        })
+        this.finished = res.data.finished
+        this.list = [...this.list, ...res.data.list]
+        this.page = res.data.page
+        this.loading = false
+      },
+      load() {
+        this.loading = true
+        this.getList()
+      },
     },
   }
 </script>
