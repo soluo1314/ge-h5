@@ -1,8 +1,8 @@
 <!--
  * @Author: xyw
  * @Date: 2022-04-11 11:51:14
- * @LastEditors: xyw
- * @LastEditTime: 2022-04-14 14:16:34
+ * @LastEditors: lz
+ * @LastEditTime: 2022-04-22 14:00:52
  * @Description: 
 -->
 <template>
@@ -11,49 +11,86 @@
     <div class="box">
       <div class="item">
         <div class="label">Account</div>
-        <div class="zn-flex-1"> gz2002 </div>
+        <div class="zn-flex-1"> {{ info.account }} </div>
       </div>
       <div class="item">
         <div class="label">Nickname</div>
         <div class="zn-flex-1">
-          <van-field class="fieldbox" v-model="value" placeholder="Please enter ther nickname" />
+          <van-field class="fieldbox" v-model="nickname" placeholder="Please enter ther nickname" />
         </div>
       </div>
       <div class="item">
         <div class="label">Current Avatar</div>
-        <div><van-uploader v-model="fileList" multiple /></div>
+        <div>
+          <img
+            style="width: 5rem; height: 2.2rem; margin-right: -4.266667vw"
+            :src="info.headimgurl"
+            alt="url error"
+          />
+          <!-- <van-uploader v-model="fileList" multiple disabled /> -->
+        </div>
       </div>
-      <div class="item">
+      <!-- <div class="item">
         <div class="label">Modify Avatar</div>
         <div><van-uploader v-model="fileList" multiple /></div>
-      </div>
+      </div> -->
       <div class="item">
         <div class="label">Password</div>
         <div class="zn-flex-1">
           <van-field
             class="fieldbox"
             type="password"
-            v-model="value"
+            v-model="password"
             placeholder="Enter the payment password"
           />
         </div>
       </div>
     </div>
-    <div class="btn zn-flex zn-ai-center zn-jc-center">
+    <div class="btn zn-flex zn-ai-center zn-jc-center" @click="submit()">
       <div>Submit</div>
     </div>
   </div>
 </template>
 
 <script>
+  import { mapActions, mapGetters } from 'vuex'
   import NavBar from '@/components/NavBar'
+  import { updateNickName } from '@/api/userApi'
   export default {
     name: 'info',
     components: {
       NavBar,
     },
     data() {
-      return {}
+      return {
+        info: {
+          account: '',
+          balance: '',
+          email: '',
+          headimgurl: '',
+          nickname: '',
+          phone: '',
+          realname: '',
+        },
+        nickname: '',
+        password: '',
+      }
+    },
+    mounted() {
+      this.info = Object.assign({}, this.userInfo)
+    },
+    computed: {
+      ...mapGetters({ userInfo: 'userInfo' }),
+    },
+    methods: {
+      ...mapActions({ A_GET_USER_INFO: 'user/A_GET_USER_INFO' }),
+      async submit() {
+        console.log(this.nickname)
+        if (this.nickname) {
+          await updateNickName({ nickname: this.nickname })
+          await this.A_GET_USER_INFO()
+        }
+      },
     },
   }
 </script>

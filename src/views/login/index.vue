@@ -2,7 +2,7 @@
  * @Author: xyw
  * @Date: 2022-04-11 11:51:14
  * @LastEditors: lz
- * @LastEditTime: 2022-04-21 20:29:23
+ * @LastEditTime: 2022-04-22 10:49:08
  * @Description: 
 -->
 <template>
@@ -70,6 +70,9 @@
         vcode: '',
         yzmCode: require('../../assets/images/login/yzm.jpg'),
       }
+    },
+    created() {
+      this.getCode()
     },
     methods: {
       ...mapActions({ A_LOGIN: 'user/A_LOGIN' }),
