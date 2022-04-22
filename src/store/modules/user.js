@@ -2,11 +2,11 @@
  * @Description:
  * @Author: lz
  * @Date: 2022-04-18 14:03:39
- * @LastEditTime: 2022-04-21 20:02:02
- * @LastEditors: xyw
+ * @LastEditTime: 2022-04-22 11:24:04
+ * @LastEditors: lz
  */
-import { login, getUserInfo } from '@/api/userApi'
-import { getToken, setToken } from '@/utils/token'
+import { login, logOut, getUserInfo } from '@/api/userApi'
+import { getToken, setToken, removeToken } from '@/utils/token'
 
 const userInfo = JSON.parse(localStorage.getItem('GeUserInfo'))
 const state = {
@@ -22,9 +22,27 @@ const mutations = {
     localStorage.setItem('GeUserInfo', JSON.stringify(info))
     state.userInfo = info
   },
+  M_LOGIN_OUT: (state, value) => {
+    state.userInfo = value
+    localStorage.removeItem('GeUserInfo')
+  },
 }
 
 const actions = {
+  A_LOGIN_OUT: ({ commit }) => {
+    return new Promise((resolve, reject) => {
+      logOut()
+        .then(() => {
+          removeToken()
+          commit('M_SET_TOKEN', '')
+          commit('M_LOGIN_OUT', null)
+          resolve()
+        })
+        .catch((err) => {
+          reject(err)
+        })
+    })
+  },
   A_LOGIN: ({ commit }, data) => {
     return new Promise((resolve, reject) => {
       login(data)

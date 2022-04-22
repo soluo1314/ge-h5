@@ -2,7 +2,7 @@
  * @Description:
  * @Author: lz
  * @Date: 2022-04-17 14:38:53
- * @LastEditTime: 2022-04-21 20:23:10
+ * @LastEditTime: 2022-04-22 11:07:55
  * @LastEditors: lz
  */
 import request from '../utils/request.js'
@@ -21,6 +21,12 @@ export function register(data) {
     data,
   })
 }
+export function logOut() {
+  return request({
+    method: 'get',
+    url: '/api/user/logout',
+  })
+}
 export function getUserInfo() {
   return request({
     method: 'get',
@@ -31,5 +37,18 @@ export function getVcode() {
   return request({
     method: 'get',
     url: '/api/GetVcode',
+  })
+}
+export function getRegVcode() {
+  return request({
+    method: 'get',
+    url: '/api/GetVcode/register',
+  })
+}
+export function updateNickName(data) {
+  return request({
+    method: 'post',
+    url: '/api/setting/c_nickname',
+    data,
   })
 }

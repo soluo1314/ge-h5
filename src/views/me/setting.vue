@@ -1,8 +1,8 @@
 <!--
  * @Author: xyw
  * @Date: 2022-04-11 11:51:14
- * @LastEditors: xyw
- * @LastEditTime: 2022-04-14 14:16:34
+ * @LastEditors: lz
+ * @LastEditTime: 2022-04-22 10:48:09
  * @Description: 
 -->
 <template>
@@ -30,12 +30,13 @@
       </div>
     </div>
     <div class="btn zn-flex zn-ai-center zn-jc-center">
-      <div>Sign out</div>
+      <div @click="logOut()">Sign out</div>
     </div>
   </div>
 </template>
 
 <script>
+  import { mapActions } from 'vuex'
   import NavBar from '@/components/NavBar'
   export default {
     name: 'set',
@@ -44,6 +45,13 @@
     },
     data() {
       return {}
+    },
+    methods: {
+      ...mapActions({ A_LOGIN_OUT: 'user/A_LOGIN_OUT' }),
+      async logOut() {
+        await this.A_LOGIN_OUT()
+        this.$router.push('/login')
+      },
     },
   }
 </script>
