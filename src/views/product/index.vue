@@ -2,7 +2,7 @@
  * @Author: xyw
  * @Date: 2022-04-11 11:51:14
  * @LastEditors: xyw
- * @LastEditTime: 2022-04-21 13:49:42
+ * @LastEditTime: 2022-04-22 10:30:27
  * @Description: 
 -->
 <template>
@@ -53,7 +53,7 @@
 </template>
 
 <script>
-  import { plist } from '@/api/prodcutApi'
+  import { plist } from '@/api/productApi'
   import NavBar from '@/components/NavBar'
   export default {
     name: 'Product',

@@ -2,7 +2,7 @@
  * @Author: xyw
  * @Date: 2022-04-11 11:51:14
  * @LastEditors: xyw
- * @LastEditTime: 2022-04-21 19:46:29
+ * @LastEditTime: 2022-04-22 11:07:56
  * @Description: 
 -->
 <template>
@@ -11,7 +11,7 @@
     <div class="head zn-flex zn-ai-center">
       <img :src="FormData.user.headimgurl" alt="" />
       <div>
-        <div>{{ FormData.user.nickname }}</div>
+        <div>{{ FormData.user.account }}</div>
         <div style="padding-top: 0.2rem">ID:{{ FormData.user.id }}</div>
       </div>
     </div>

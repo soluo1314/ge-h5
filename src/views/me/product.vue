@@ -2,7 +2,7 @@
  * @Author: xyw
  * @Date: 2022-04-11 11:51:14
  * @LastEditors: xyw
- * @LastEditTime: 2022-04-15 18:03:13
+ * @LastEditTime: 2022-04-22 14:05:08
  * @Description: 
 -->
 <template>
@@ -10,22 +10,25 @@
     <nav-bar back="true" content="My product"> </nav-bar>
     <div class="wrap">
       <div class="w-100 zn-flex zn-ai-center zn-jc-center zn-text-orange">
-        <div style="padding: 0.5rem 0; font-size: 0.95rem">Total：₹550.00</div>
+        <div style="padding: 0.5rem 0; font-size: 0.95rem">Total：₹{{ money }}</div>
       </div>
-      <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
-        <div class="card">
+      <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="load">
+        <div class="card" v-for="item in list" :key="item.osn">
           <div class="zn-flex">
-            <img src="../../assets/images/product/item.jpg" alt="" />
+            <img :src="item.covers" alt="" />
             <div class="zn-flex-1">
-              <div class="tr">Ultrasound</div>
+              <div class="tr">{{ item.goods_name }}</div>
               <div class="tr">
-                <span class="zn-text-orange">₹550</span>
-                <span> 45days 4.3%/day </span>
+                <span class="zn-text-orange">₹{{ item.money }}</span>
+                <span> {{ item.days }}days {{ item.rate }}%/day </span>
               </div>
-              <div class="tr">Profit: 6days ₹141.90</div>
+              <div class="tr">Profit: {{ item.profit_days }}days ₹{{ item.profit_reward }}</div>
               <div class="zn-flex zn-jc-between tr">
-                <div>04-06 13:24</div>
-                <div class="btn">Receive</div>
+                <div>{{ item.create_time }}</div>
+                <div v-if="item.status == 1" class="btn red" @click="Receive(item.osn)"
+                  >Receive</div
+                >
+                <div v-else class="btn">Receive</div>
               </div>
             </div>
           </div>
@@ -36,6 +39,8 @@
 </template>
 
 <script>
+  import { order, receiveProfit } from '@/api/productApi'
+  import { Toast } from 'vant'
   import NavBar from '@/components/NavBar'
   export default {
     name: 'HomeTeams',
@@ -46,8 +51,39 @@
       return {
         loading: false,
         finished: false,
-        tableData: [1, 2, 3, 4, 5, 6, 7, 8, 9],
+        list: [],
+        page: 1,
+        money: 0,
       }
+    },
+    methods: {
+      async getList() {
+        const res = await order({
+          page: this.page,
+        })
+        res.data.list.map((n) => {
+          n.covers = process.env.VUE_APP_PIC_URL + n.covers[0].replace('/public', '')
+          n.icon = process.env.VUE_APP_PIC_URL + n.icon.replace('/public', '')
+        })
+        this.finished = res.data.finished
+        this.list = [...this.list, ...res.data.list]
+        this.page = res.data.page
+        this.money = res.data.money
+        this.loading = false
+      },
+      load() {
+        this.loading = true
+        this.getList()
+      },
+      async Receive(osn) {
+        const res = await receiveProfit({
+          osn: osn,
+        })
+        Toast.success(res.info)
+        this.page = 1
+        this.list = []
+        this.getList()
+      },
     },
   }
 </script>
@@ -64,6 +100,7 @@
         color: #fff;
         border-radius: 5px;
         padding: 8px 16px;
+        margin-bottom: 1rem;
         img {
           width: 88px;
           height: 88px;
@@ -84,6 +121,10 @@
               text-align: center;
               background-color: rgb(153, 153, 153);
               border-color: rgb(153, 153, 153);
+              &.red {
+                background-color: red;
+                border-color: red;
+              }
             }
           }
         }

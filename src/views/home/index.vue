@@ -2,7 +2,7 @@
  * @Author: xyw
  * @Date: 2022-04-11 11:51:14
  * @LastEditors: xyw
- * @LastEditTime: 2022-04-21 20:05:07
+ * @LastEditTime: 2022-04-22 11:08:10
  * @Description: 
 -->
 <template>
@@ -23,7 +23,7 @@
               @click="$router.push('/me')"
               src="../../assets/images/home/user.png"
             />
-            <div style="padding-left: 0.5rem">{{ userInfo.nickname }}</div>
+            <div style="padding-left: 0.5rem">{{ userInfo.account }}</div>
           </div>
           <img
             class="logo"

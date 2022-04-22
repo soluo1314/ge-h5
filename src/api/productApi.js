@@ -2,7 +2,7 @@
  * @Author: xyw
  * @Date: 2022-04-20 17:25:35
  * @LastEditors: xyw
- * @LastEditTime: 2022-04-21 16:02:02
+ * @LastEditTime: 2022-04-22 14:02:09
  * @Description:
  */
 import request from '../utils/request.js'
@@ -35,6 +35,14 @@ export function invest(data) {
   return request({
     method: 'post',
     url: '/api/product/invest',
+    data,
+  })
+}
+//产品接收
+export function receiveProfit(data) {
+  return request({
+    method: 'post',
+    url: '/api/product/receiveProfit',
     data,
   })
 }

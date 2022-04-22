@@ -2,7 +2,7 @@
  * @Author: xyw
  * @Date: 2022-04-11 11:51:14
  * @LastEditors: xyw
- * @LastEditTime: 2022-04-21 16:05:44
+ * @LastEditTime: 2022-04-22 10:30:34
  * @Description: 
 -->
 <template>
@@ -90,7 +90,7 @@
 </template>
 
 <script>
-  import { goods, invest } from '@/api/prodcutApi'
+  import { goods, invest } from '@/api/productApi'
   import NavBar from '@/components/NavBar'
   import { Toast } from 'vant'
   export default {

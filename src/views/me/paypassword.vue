@@ -2,7 +2,7 @@
  * @Author: xyw
  * @Date: 2022-04-11 11:51:14
  * @LastEditors: xyw
- * @LastEditTime: 2022-04-14 14:16:34
+ * @LastEditTime: 2022-04-22 14:21:43
  * @Description: 
 -->
 <template>
@@ -11,37 +11,47 @@
     <div class="box">
       <div class="item hasp">
         <van-icon name="user-o" />
-        <div>gz2002</div>
+        <div>{{ userInfo.account }}</div>
       </div>
       <div class="item hasp">
         <van-icon name="phone-o" />
         <div class="zn-flex zn-ai-center zn-jc-between zn-flex-1">
-          <div>885**420</div>
-          <div>Receives messages</div>
+          <div>{{ userInfo.phone.slice(0, 2) + '***' + userInfo.phone.slice(5) }}</div>
+          <div style="color: #969799">Receives messages</div>
         </div>
       </div>
       <div class="item">
         <van-icon name="envelop-o" />
         <div class="zn-flex-1">
-          <van-field class="fieldbox" v-model="value" placeholder="SMS verification code" />
-        </div>
-      </div>
-      <div class="item">
-        <van-icon name="closed-eye" />
-        <div class="zn-flex-1">
-          <van-field class="fieldbox" v-model="value" placeholder="New password" />
+          <van-field class="fieldbox" v-model="code" placeholder="SMS verification code" />
         </div>
         <div class="send zn-flex zn-ai-center zn-jc-center">Send</div>
       </div>
       <div class="item">
+        <van-icon name="closed-eye" />
+        <div class="zn-flex-1">
+          <van-field
+            class="fieldbox"
+            type="password"
+            v-model="password"
+            placeholder="New password"
+          />
+        </div>
+      </div>
+      <div class="item">
         <van-icon name="passed" />
         <div class="zn-flex-1">
-          <van-field class="fieldbox" v-model="value" placeholder="Confirm password" />
+          <van-field
+            class="fieldbox"
+            type="password"
+            v-model="password2"
+            placeholder="Confirm password"
+          />
         </div>
       </div>
     </div>
     <div class="btn zn-flex zn-ai-center zn-jc-center">
-      <div>Submit</div>
+      <div @click="submit">Submit</div>
     </div>
     <div class="zn-mt-2" style="text-align: center; color: rgb(210, 160, 95); padding: 0px 2rem"
       >The initial payment password is the same as the login password</div
@@ -50,6 +60,8 @@
 </template>
 
 <script>
+  import { password_update } from '@/api/meApi'
+  import { Toast } from 'vant'
   import NavBar from '@/components/NavBar'
   export default {
     name: 'paypassword',
@@ -57,7 +69,29 @@
       NavBar,
     },
     data() {
-      return {}
+      return {
+        code: '',
+        password: '',
+        password2: '',
+      }
+    },
+    computed: {
+      userInfo() {
+        return this.$store.getters.userInfo
+      },
+    },
+    methods: {
+      async submit() {
+        if (this.password != this.password2) {
+          Toast.fail('The password entered twice is inconsistent')
+          return
+        }
+        const res = await password_update({
+          password: this.password,
+          type: 2,
+        })
+        Toast.success(res.info)
+      },
     },
   }
 </script>

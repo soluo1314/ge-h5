@@ -2,7 +2,7 @@
  * @Author: xyw
  * @Date: 2022-04-11 11:51:14
  * @LastEditors: xyw
- * @LastEditTime: 2022-04-22 09:25:25
+ * @LastEditTime: 2022-04-22 13:59:31
  * @Description: 
 -->
 <template>
@@ -21,7 +21,7 @@
       <div class="item">
         <div class="label">Bank :</div>
         <div class="zn-flex zn-jc-between zn-ai-center zn-flex-1" @click="show = true">
-          <div>DCB Bank</div>
+          <div>{{ form.bank_name }}</div>
           <van-icon name="arrow" />
         </div>
       </div>
@@ -35,26 +35,28 @@
         /></div>
       </div>
       <div class="item">
-        <div class="label">IFSC :</div>
+        <div class="label">pay password :</div>
         <div
           ><van-field
             class="fieldbox"
+            type="password"
             v-model="form.password2"
-            placeholder="Please enter the ifsc code"
+            placeholder="Please enter the pay password"
         /></div>
       </div>
     </div>
     <div class="btn zn-flex zn-ai-center zn-jc-center">
-      <div>Submit</div>
+      <div @click="submit">Submit</div>
     </div>
-    <van-popup v-model="show" position="bottom" :style="{ height: '60%' }">
+    <van-popup v-model="show" position="bottom" :style="{ height: '40%' }">
       <van-picker
-        title="标题"
+        confirm-button-text="Confirm"
+        cancel-button-text="Cancel"
         show-toolbar
         :columns="columns"
-        @confirm="submit"
+        valueKey="name"
+        @confirm="confirm"
         @cancel="show = false"
-        @change="onChange"
       />
     </van-popup>
   </div>
@@ -62,6 +64,7 @@
 
 <script>
   import { bank, bank_update } from '@/api/meApi'
+  import { Toast } from 'vant'
   import NavBar from '@/components/NavBar'
   export default {
     name: 'bank',
@@ -88,11 +91,16 @@
       async getBanks() {
         const res = await bank()
         this.columns = res.data.bank_arr
-        this.form = Object.assign(this.from, res.data.bank)
+        this.form = Object.assign(this.form, res.data.bank)
       },
       async submit() {
-        const res = await bank_update({})
-        console.log(res)
+        const res = await bank_update(this.form)
+        Toast.success(res.info)
+      },
+      confirm(item) {
+        this.form.bank_id = item.id
+        this.form.bank_name = item.name
+        this.show = false
       },
     },
   }
@@ -110,10 +118,11 @@
         border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         display: flex;
         align-items: center;
+        font-size: 14px;
         .label {
           margin-right: 1rem;
           text-align: right;
-          width: 6rem;
+          width: 6.5rem;
         }
         .fieldbox {
           background: transparent;
