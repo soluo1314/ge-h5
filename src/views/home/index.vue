@@ -2,7 +2,7 @@
  * @Author: xyw
  * @Date: 2022-04-11 11:51:14
  * @LastEditors: xyw
- * @LastEditTime: 2022-04-20 17:43:23
+ * @LastEditTime: 2022-04-21 20:05:07
  * @Description: 
 -->
 <template>
@@ -92,6 +92,7 @@
 
 <script>
   import { getHome } from '@/api/homeApi'
+  // import { mapGetters } from 'vuex'
   export default {
     name: 'Home',
     data() {
@@ -109,7 +110,7 @@
     },
     computed: {
       userInfo() {
-        return JSON.parse(this.$store.getters.userInfo)
+        return this.$store.getters.userInfo
       },
     },
     methods: {

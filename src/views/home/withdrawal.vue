@@ -2,11 +2,11 @@
  * @Author: xyw
  * @Date: 2022-04-11 11:51:14
  * @LastEditors: xyw
- * @LastEditTime: 2022-04-21 19:04:41
+ * @LastEditTime: 2022-04-21 20:09:06
  * @Description: 
 -->
 <template>
-  <div class="app-container">
+  <div class="app-container withdrawal">
     <nav-bar back="true" content="Withdraw">
       <template slot="right">
         <span @click="$router.push('/home/withdrawalrecords')">Records</span>
@@ -75,7 +75,7 @@
     },
   }
 </script>
-<style scoped>
+<style lang="scss">
   .van-field__control {
     color: #fff !important;
   }

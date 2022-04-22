@@ -2,11 +2,11 @@
  * @Author: xyw
  * @Date: 2022-04-11 11:51:14
  * @LastEditors: xyw
- * @LastEditTime: 2022-04-21 19:07:13
+ * @LastEditTime: 2022-04-21 20:10:08
  * @Description: 
 -->
 <template>
-  <div class="app-container">
+  <div class="app-container redpack">
     <nav-bar back="true" content="Redpack"> </nav-bar>
     <div class="wrap">
       <div class="code">
@@ -43,6 +43,14 @@
     },
   }
 </script>
+
+<style lang="scss">
+  .redpack {
+    .van-field__control {
+      color: #232323 !important;
+    }
+  }
+</style>
 
 <style lang="scss" scoped>
   v-deep .van-field__control {

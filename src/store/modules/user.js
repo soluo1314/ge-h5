@@ -2,8 +2,8 @@
  * @Description:
  * @Author: lz
  * @Date: 2022-04-18 14:03:39
- * @LastEditTime: 2022-04-19 22:20:45
- * @LastEditors: lz
+ * @LastEditTime: 2022-04-21 20:02:02
+ * @LastEditors: xyw
  */
 import { login, getUserInfo } from '@/api/userApi'
 import { getToken, setToken } from '@/utils/token'
@@ -20,7 +20,7 @@ const mutations = {
   },
   M_SET_INFO: (state, info) => {
     localStorage.setItem('GeUserInfo', JSON.stringify(info))
-    state.userInfo = JSON.stringify(info)
+    state.userInfo = info
   },
 }
 
