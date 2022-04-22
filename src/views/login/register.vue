@@ -2,7 +2,7 @@
  * @Author: xyw
  * @Date: 2022-04-11 11:51:14
  * @LastEditors: lz
- * @LastEditTime: 2022-04-21 20:32:47
+ * @LastEditTime: 2022-04-22 09:23:24
  * @Description: 
 -->
 <template>
@@ -39,7 +39,13 @@
           <div class="zn-flex-1">
             <van-field class="fieldbox" v-model="imgcode" placeholder="SMS verification code" />
           </div>
-          <div class="send zn-flex zn-ai-center zn-jc-center" @click="getCode">Send</div>
+          <img
+            style="width: 5rem; height: 2.2rem; margin-right: -4.266667vw"
+            :src="yzmImg"
+            alt=""
+            @click="getCode"
+          />
+          <!-- <div class="send zn-flex zn-ai-center zn-jc-center" @click="getCode">Send</div> -->
         </div>
         <div class="item">
           <img src="../../assets/images/login/people.png" alt="" />
@@ -56,15 +62,16 @@
           <div @click="$router.push('/login')" class="zn-text-orange">Sign in now</div>
         </div>
       </div>
+
+      <div class="btn zn-flex zn-ai-center zn-jc-center">
+        <van-button round block type="info" native-type="submit">Sign up</van-button>
+      </div>
     </van-form>
-    <div class="btn zn-flex zn-ai-center zn-jc-center">
-      <van-button round block type="info" native-type="submit">Sign up</van-button>
-    </div>
   </div>
 </template>
 
 <script>
-  import { register, getVcode } from '@/api/userApi'
+  import { register, getRegVcode } from '@/api/userApi'
   export default {
     name: 'register',
     data() {
@@ -73,8 +80,12 @@
         password: '',
         captcha_id: '',
         imgcode: '',
-        icode: '',
+        icode: 'H4RSP8',
+        yzmImg: require('../../assets/images/login/yzm.jpg'),
       }
+    },
+    created() {
+      this.getCode()
     },
     methods: {
       async onSubmit() {
@@ -82,13 +93,15 @@
           account: this.account,
           password: this.password,
           captcha_id: this.captcha_id,
-          vcode: this.vcode,
+          imgcode: this.imgcode,
+          icode: this.icode,
         })
-        this.$router.push('/')
+        this.$router.push('/login')
       },
       async getCode() {
-        const res = await getVcode()
-        this.captcha_id = res.data.captcha_id
+        const res = await getRegVcode()
+        this.captcha_id = res.data.captcha_id_reg
+        this.yzmImg = res.data.image
       },
     },
   }

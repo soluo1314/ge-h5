@@ -2,7 +2,7 @@
  * @Description:
  * @Author: lz
  * @Date: 2022-04-17 14:38:53
- * @LastEditTime: 2022-04-21 20:23:10
+ * @LastEditTime: 2022-04-22 09:17:13
  * @LastEditors: lz
  */
 import request from '../utils/request.js'
@@ -31,5 +31,11 @@ export function getVcode() {
   return request({
     method: 'get',
     url: '/api/GetVcode',
+  })
+}
+export function getRegVcode() {
+  return request({
+    method: 'get',
+    url: '/api/GetVcode/register',
   })
 }
