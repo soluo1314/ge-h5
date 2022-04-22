@@ -2,18 +2,19 @@
  * @Author: xyw
  * @Date: 2022-04-11 11:51:14
  * @LastEditors: xyw
- * @LastEditTime: 2022-04-20 17:16:44
+ * @LastEditTime: 2022-04-22 16:26:13
  * @Description: 
 -->
 <template>
   <div class="app-container">
     <nav-bar back="true" content="Service"></nav-bar>
-    <div class="t1 zn-text-ct">Telegram</div>
+    <div class="t1 zn-text-ct">{{ $route.query.name }}</div>
     <div class="t2 zn-text-ct">
-      <canvas id="QRCode_header"></canvas>
+      <!-- <canvas id="QRCode_header"></canvas> -->
+      <img :src="$route.query.qrcode" alt="" />
     </div>
     <div class="t3 zn-text-ct">
-      <a href="###">@tel823482001</a>
+      <a href="###">{{ $route.query.account }}</a>
     </div>
   </div>
 </template>
@@ -82,7 +83,8 @@
     }
     .t2 {
       margin-top: 0.8rem;
-      #QRCode_header {
+      #QRCode_header,
+      img {
         width: 240px;
         height: 240px;
         margin: auto;

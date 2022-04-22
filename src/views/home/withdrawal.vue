@@ -2,7 +2,7 @@
  * @Author: xyw
  * @Date: 2022-04-11 11:51:14
  * @LastEditors: xyw
- * @LastEditTime: 2022-04-21 20:09:06
+ * @LastEditTime: 2022-04-22 17:49:34
  * @Description: 
 -->
 <template>
@@ -23,20 +23,20 @@
       </div>
       <div class="item">
         <div>Bank name : </div>
-        <div>DCB Bank</div>
+        <div>{{ FormData.bank_name }}</div>
       </div>
       <div class="item">
         <div>Realname : </div>
-        <div>aaaaa</div>
+        <div>{{ FormData.realname }}</div>
       </div>
       <div class="item">
         <div>Bank Account : </div>
-        <div>11111111</div>
+        <div>{{ FormData.account }}</div>
       </div>
-      <div class="item">
+      <!-- <div class="item">
         <div>IFSC code : </div>
         <div>22222</div>
-      </div>
+      </div> -->
       <div class="item">Amount：</div>
       <div class="item">
         <van-field
@@ -49,19 +49,22 @@
       <div class="item">
         <van-field
           class="fieldbox"
+          type="password"
           v-model="password"
           placeholder="Please enter the payment password"
         />
       </div>
     </div>
     <div class="zn-flex zn-ai-center zn-jc-center">
-      <div class="btn zn-flex zn-ai-center zn-jc-center">Submit</div>
+      <div class="btn zn-flex zn-ai-center zn-jc-center" @click="submit">Submit</div>
     </div>
   </div>
 </template>
 
 <script>
+  import { withdraw, withdrawAct } from '@/api/amountApi'
   import NavBar from '@/components/NavBar'
+  import { Toast } from 'vant'
   export default {
     name: 'HomeWithdrawal',
     components: {
@@ -71,7 +74,26 @@
       return {
         amount: '',
         password: '',
+        FormData: {},
+        balance: 0,
       }
+    },
+    mounted() {
+      this.init()
+    },
+    methods: {
+      async init() {
+        const res = await withdraw()
+        this.FormData = res.data.banklog
+        this.balance = this.FormData.wallet.balance
+      },
+      async submit() {
+        const res = await withdrawAct({
+          money: this.amount,
+          password2: this.password,
+        })
+        Toast.success(res.info)
+      },
     },
   }
 </script>
@@ -91,6 +113,7 @@
         padding: 0.3rem 0;
         display: flex;
         align-items: center;
+        line-height: 21px;
         div:nth-child(1) {
           margin-right: 1rem;
         }

@@ -2,13 +2,13 @@
  * @Author: xyw
  * @Date: 2022-04-11 11:51:14
  * @LastEditors: xyw
- * @LastEditTime: 2022-04-15 15:35:37
+ * @LastEditTime: 2022-04-22 17:54:50
  * @Description: 
 -->
 <template>
   <div class="app-container">
     <nav-bar back="true" content="Withdraw"> </nav-bar>
-    <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
+    <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="load">
       <div class="tablebox">
         <div class="table">
           <div class="tr zn-flex zn-ai-center w-100">
@@ -16,13 +16,13 @@
             <div class="th">Money</div>
             <div class="th">Status</div>
           </div>
-          <div class="tr zn-flex zn-ai-center w-100" v-for="item in tableData" :key="item">
+          <div class="tr zn-flex zn-ai-center w-100" v-for="item in list" :key="item">
             <div class="td">
-              <div>04-14 14:20:51</div>
-              <div>158d37480124eb7f</div>
+              <div>{{ item.create_time }}</div>
+              <div>{{ item.osn }}</div>
             </div>
-            <div class="td">550</div>
-            <div class="td">Waiting payment</div>
+            <div class="td">{{ item.money }}</div>
+            <div class="td">{{ item.status_flag }}</div>
           </div>
         </div>
       </div>
@@ -31,6 +31,7 @@
 </template>
 
 <script>
+  import { cashlog } from '@/api/amountApi'
   import NavBar from '@/components/NavBar'
   export default {
     name: 'HomeRechargerecords',
@@ -41,8 +42,24 @@
       return {
         loading: false,
         finished: false,
-        tableData: [1, 2, 3, 4, 5],
+        list: [],
+        page: 1,
       }
+    },
+    methods: {
+      async getList() {
+        const res = await cashlog({
+          page: this.page,
+        })
+        this.finished = res.data.finished
+        this.list = [...this.list, ...res.data.list]
+        this.page = res.data.page
+        this.loading = false
+      },
+      load() {
+        this.loading = true
+        this.getList()
+      },
     },
   }
 </script>

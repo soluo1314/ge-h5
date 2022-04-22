@@ -2,7 +2,7 @@
  * @Author: xyw
  * @Date: 2022-04-11 11:51:14
  * @LastEditors: xyw
- * @LastEditTime: 2022-04-22 11:08:10
+ * @LastEditTime: 2022-04-22 16:25:38
  * @Description: 
 -->
 <template>
@@ -28,7 +28,11 @@
           <img
             class="logo"
             src="../../assets/images/home/erji.png"
-            @click="$router.push('/home/qrcode')"
+            @click="
+              $router.push(
+                `/home/qrcode?account=${FormData.service.account}&name=${FormData.service.name}&qrcode=${FormData.service.qrcode}`
+              )
+            "
           />
         </div>
         <van-swipe
@@ -78,7 +82,7 @@
               class="item"
               v-for="item in FormData.news"
               :key="item.id"
-              @click="$router.push('/home/newsdetail')"
+              @click="$router.push('/home/newsdetail?id=' + item.id)"
             >
               <p>{{ item.title }}</p>
               <img :src="item.cover" />
@@ -102,6 +106,11 @@
           news: [],
           notice: [],
           video: {},
+          service: {
+            account: '',
+            name: '',
+            qrcode: '',
+          },
         },
       }
     },
@@ -129,6 +138,7 @@
           (pre, curr) => pre + '   ' + curr.title,
           ''
         )
+        this.FormData.service.qrcode += process.env.VUE_APP_PIC_URL
         console.log(res)
       },
     },

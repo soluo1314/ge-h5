@@ -2,7 +2,7 @@
  * @Author: xyw
  * @Date: 2022-04-11 11:51:14
  * @LastEditors: xyw
- * @LastEditTime: 2022-04-14 19:30:18
+ * @LastEditTime: 2022-04-22 17:30:36
  * @Description: 
 -->
 <template>
@@ -11,29 +11,30 @@
     <div class="box">
       <div class="item">
         <div>Order No.</div>
-        <div>158d37480124eb7f</div>
+        <div>{{ FormData.osn }}</div>
       </div>
       <div class="item">
         <div>Money</div>
-        <div>550</div>
+        <div>{{ FormData.money }}</div>
       </div>
       <div class="item">
         <div>Pay type</div>
-        <div>Online Payment</div>
+        <div>{{ FormData.osn }}</div>
       </div>
       <div class="item">
         <div>Order time</div>
-        <div>04-14 14:20:51</div>
+        <div>{{ FormData.create_time }}</div>
       </div>
       <div class="item">
         <div>Status</div>
-        <div>Waiting payment</div>
+        <div>{{ FormData.status_flag }}</div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+  import { payinfo } from '@/api/amountApi'
   import NavBar from '@/components/NavBar'
   export default {
     name: 'HomeOrderdetails',
@@ -41,7 +42,20 @@
       NavBar,
     },
     data() {
-      return {}
+      return {
+        FormData: {},
+      }
+    },
+    mounted() {
+      this.getDetail()
+    },
+    methods: {
+      async getDetail() {
+        const res = await payinfo({
+          osn: this.$route.query.osn,
+        })
+        this.FormData = res.data.item
+      },
     },
   }
 </script>

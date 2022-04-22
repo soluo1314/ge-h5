@@ -2,7 +2,7 @@
  * @Author: xyw
  * @Date: 2022-04-11 11:51:14
  * @LastEditors: xyw
- * @LastEditTime: 2022-04-14 17:21:33
+ * @LastEditTime: 2022-04-22 16:45:16
  * @Description: 
 -->
 <template>
@@ -13,38 +13,43 @@
       </template>
     </nav-bar>
     <div class="recharge_wrap">
-      <div class="balance">Balance：0.00</div>
+      <div class="balance">Balance：{{ FormData.wallet.balance }}</div>
       <div class="amount_txt">Amount：</div>
       <div class="payItemBox">
-        <div class="item">550</div>
-        <div class="item">10000</div>
-        <div class="item">20000</div>
-        <div class="item">50000</div>
-        <div class="item">70000</div>
-        <div class="item">90000</div>
-        <div class="item">99999</div>
+        <div
+          class="item"
+          :class="{ active: amount == item }"
+          v-for="item in FormData.pay_items"
+          :key="item"
+          @click="amount = item"
+          >{{ item }}</div
+        >
       </div>
       <div>
-        <van-field class="fieldbox" v-model="value" placeholder="Please enter amount" />
+        <van-field class="fieldbox" v-model="amount" placeholder="Please enter amount" />
       </div>
       <div class="payway">
         <van-radio-group v-model="payway">
-          <van-radio class="w-100 zn-text-white" name="1" icon-size="24px" label-position="left"
-            >ssk_105</van-radio
-          >
-          <van-radio class="w-100 zn-text-white" name="2" icon-size="24px" label-position="left"
-            >NinePay</van-radio
+          <van-radio
+            class="w-100 zn-text-white"
+            :name="item.type"
+            icon-size="24px"
+            label-position="left"
+            v-for="item in FormData.pay_types"
+            :key="item.id"
+            >{{ item.name }}</van-radio
           >
         </van-radio-group>
       </div>
       <div class="zn-flex zn-jc-center zn-ai-center">
-        <div class="btn zn-flex zn-jc-center zn-ai-center">Submit</div>
+        <div class="btn zn-flex zn-jc-center zn-ai-center" @click="Submit">Submit</div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+  import { recharge } from '@/api/amountApi'
   import NavBar from '@/components/NavBar'
   export default {
     name: 'HomeRecharge',
@@ -53,9 +58,26 @@
     },
     data() {
       return {
-        value: '',
-        payway: '1',
+        amount: '',
+        payway: '',
+        FormData: {
+          wallet: {},
+          pay_items: [],
+          pay_types: [],
+        },
       }
+    },
+    mounted() {
+      this.init()
+    },
+    methods: {
+      async init() {
+        const res = await recharge()
+        this.FormData = res.data
+      },
+      async Submit() {
+        this.$router.push('/pay')
+      },
     },
   }
 </script>
@@ -96,6 +118,10 @@
           line-height: 2rem;
           padding: 0 0.5rem;
           border-radius: 2px;
+          &.active {
+            border: 1px solid #d2a05f;
+            color: #d2a05f;
+          }
         }
       }
       .fieldbox {
