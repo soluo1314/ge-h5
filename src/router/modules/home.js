@@ -1,4 +1,11 @@
 /*
+ * @Description:
+ * @Author: lz
+ * @Date: 2022-04-17 14:38:53
+ * @LastEditTime: 2022-04-23 16:24:46
+ * @LastEditors: lz
+ */
+/*
  * @Author: xyw
  * @Date: 2022-04-11 11:51:14
  * @LastEditors: xyw
@@ -70,6 +77,12 @@ const HomeRoute = {
       name: 'HomeNewsdetail',
       component: () => import('@/views/home/newsdetail'),
       meta: { title: 'HomeNewsdetail', keepAlive: false, showTab: false },
+    },
+    {
+      path: '/pay',
+      name: 'pay',
+      component: () => import('@/views/home/pay'),
+      meta: { title: 'pay', keepAlive: false, showTab: false },
     },
   ],
 }

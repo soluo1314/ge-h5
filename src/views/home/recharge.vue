@@ -1,12 +1,12 @@
 <!--
  * @Author: xyw
  * @Date: 2022-04-11 11:51:14
- * @LastEditors: xyw
- * @LastEditTime: 2022-04-22 16:45:16
+ * @LastEditors: lz
+ * @LastEditTime: 2022-04-23 16:40:43
  * @Description: 
 -->
 <template>
-  <div class="app-container">
+  <div class="app-container recharge">
     <nav-bar back="true" content="Recharge">
       <template slot="right">
         <span @click="$router.push('/home/rechargerecords')">Records</span>
@@ -49,7 +49,7 @@
 </template>
 
 <script>
-  import { recharge } from '@/api/amountApi'
+  import { recharge, rechargeAct_post } from '@/api/amountApi'
   import NavBar from '@/components/NavBar'
   export default {
     name: 'HomeRecharge',
@@ -74,21 +74,30 @@
       async init() {
         const res = await recharge()
         this.FormData = res.data
+        this.payway = this.FormData.pay_types[0].type
       },
       async Submit() {
-        this.$router.push('/pay')
+        const res = await rechargeAct_post({
+          pay_type: this.payway,
+          money: this.amount,
+          bank_id: '',
+        })
+        console.log(res)
+        // this.$router.push('/pay')
       },
     },
   }
 </script>
 <style lang="scss">
-  .van-radio__label {
-    color: #fff !important;
-  }
-  .van-radio__icon--checked {
-    .van-icon {
-      background-color: #d2a05f;
-      border-color: #d2a05f;
+  .recharge {
+    .van-radio__label {
+      color: #fff !important;
+    }
+    .van-radio__icon--checked {
+      .van-icon {
+        background-color: #d2a05f;
+        border-color: #d2a05f;
+      }
     }
   }
 </style>

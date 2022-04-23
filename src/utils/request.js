@@ -2,8 +2,8 @@
  * @Description:
  * @Author: lz
  * @Date: 2022-04-17 14:38:53
- * @LastEditTime: 2022-04-21 15:21:04
- * @LastEditors: xyw
+ * @LastEditTime: 2022-04-23 16:53:35
+ * @LastEditors: lz
  */
 import axios from 'axios'
 import { Toast } from 'vant'
@@ -52,6 +52,7 @@ service.interceptors.response.use(
    */
   (response) => {
     const res = response.data
+    console.log(res)
     if (res.code !== 1) {
       if (res.code === -98) {
         // Dialog.confirm({
