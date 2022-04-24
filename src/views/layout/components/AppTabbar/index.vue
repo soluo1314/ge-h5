@@ -2,7 +2,7 @@
  * @Author: xyw
  * @Date: 2022-04-11 11:51:14
  * @LastEditors: xyw
- * @LastEditTime: 2022-04-11 16:28:46
+ * @LastEditTime: 2022-04-24 18:38:17
  * @Description: 
 -->
 <template>
@@ -58,7 +58,7 @@
           </template>
         </template>
       </van-tabbar-item>
-      <van-tabbar-item replace>
+      <van-tabbar-item replace @click="open">
         <span>Community</span>
         <template #icon="props">
           <template
@@ -102,6 +102,18 @@
       return {
         active: 0,
       }
+    },
+    computed: {
+      community_url() {
+        return localStorage.getItem('community_url')
+      },
+    },
+    methods: {
+      open() {
+        if (this.community_url) {
+          window.open(this.community_url)
+        }
+      },
     },
   }
 </script>

@@ -2,7 +2,7 @@
  * @Author: xyw
  * @Date: 2022-04-11 16:38:45
  * @LastEditors: xyw
- * @LastEditTime: 2022-04-11 16:41:25
+ * @LastEditTime: 2022-04-24 18:13:47
  * @Description:
  */
 import { Layout } from '../constants'
@@ -40,6 +40,12 @@ const MeRoute = {
       name: 'financial',
       component: () => import('@/views/me/financial'),
       meta: { title: 'financial', keepAlive: false, showTab: false },
+    },
+    {
+      path: '/me/financialType',
+      name: 'financialType',
+      component: () => import('@/views/me/financialType'),
+      meta: { title: 'financialType', keepAlive: false, showTab: false },
     },
     {
       path: '/me/redpack',
