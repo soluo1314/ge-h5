@@ -1,8 +1,8 @@
 <!--
  * @Author: xyw
  * @Date: 2022-04-11 11:51:14
- * @LastEditors: lz
- * @LastEditTime: 2022-04-23 16:40:43
+ * @LastEditors: xyw
+ * @LastEditTime: 2022-04-24 09:58:29
  * @Description: 
 -->
 <template>
@@ -49,7 +49,8 @@
 </template>
 
 <script>
-  import { recharge, rechargeAct_post } from '@/api/amountApi'
+  import { recharge, rechargeAct } from '@/api/amountApi'
+  // import { Toast } from 'vant'
   import NavBar from '@/components/NavBar'
   export default {
     name: 'HomeRecharge',
@@ -77,13 +78,15 @@
         this.payway = this.FormData.pay_types[0].type
       },
       async Submit() {
-        const res = await rechargeAct_post({
+        // if (this.amount == '' || this.amount == 0) {
+        //   Toast.fail('Recharge limit is too small')
+        //   return
+        // }
+        const res = await rechargeAct({
           pay_type: this.payway,
           money: this.amount,
-          bank_id: '',
         })
-        console.log(res)
-        // this.$router.push('/pay')
+        this.$router.push(`/pay?info=${JSON.stringify(res.data.bank_account)}`)
       },
     },
   }

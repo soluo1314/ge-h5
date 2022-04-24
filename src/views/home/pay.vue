@@ -1,179 +1,106 @@
 <!--
  * @Author: xyw
  * @Date: 2022-04-11 11:51:14
- * @LastEditors: lz
- * @LastEditTime: 2022-04-23 22:30:20
+ * @LastEditors: xyw
+ * @LastEditTime: 2022-04-24 10:24:55
  * @Description: 
 -->
 <template>
-  <div class="app-container pay">
-    <div class="bg"></div>
+  <div class="app-container">
+    <nav-bar back="true" content="Pay order"> </nav-bar>
     <div class="box">
-      <div class="top">
-        <div>
-          <div class="t1">₹</div>
-          <div class="t2">The amount you need to pay</div>
-        </div>
-        <div class="t3">Select an option to pay(UPI)</div>
+      <div class="item">
+        <div class="label">Realname :</div>
+        <div>{{ FormData.realname }}</div>
       </div>
-      <div class="payway">
-        <van-radio-group v-model="payway">
-          <van-radio
-            class="w-100 zn-text-white item"
-            :name="item.type"
-            icon-size="24px"
-            label-position="left"
-            v-for="item in FormData.pay_types"
-            :key="item.id"
-          >
-            <img src="../../assets/images/home/women.png" alt="" />
-            {{ item.bank_name }}
-          </van-radio>
-        </van-radio-group>
+      <div class="item">
+        <div class="label">Bank :</div>
+        <div>{{ FormData.bank_name }} </div>
       </div>
-      <div class="btn" @click="submit"> Pay ₹ </div>
+      <div class="item">
+        <div class="label">Account :</div>
+        <div>{{ FormData.account }}</div>
+      </div>
+      <div class="item">
+        <div class="label">money :</div>
+        <div>{{ FormData.pay_num }}</div>
+      </div>
+    </div>
+    <div class="btn zn-flex zn-ai-center zn-jc-center">
+      <div @click="submit">Submit</div>
     </div>
   </div>
 </template>
 
 <script>
   import { rechargeAct_post } from '@/api/amountApi'
+  import { Toast } from 'vant'
+  import NavBar from '@/components/NavBar'
   export default {
-    name: 'pay',
+    name: 'bank',
+    components: {
+      NavBar,
+    },
     data() {
       return {
-        payway: 'card',
-        FormData: {
-          pay_types: [
-            {
-              pay_num: 55018,
-              bank_name: '국민기업은행',
-              account: '80460104294220',
-              realname: '유한회사 와이제이에이치와',
-              bank_id: 2,
-              type: 'card',
-            },
-            {
-              pay_num: 55018,
-              bank_name: '국민기업은행',
-              account: '80460104294220',
-              realname: '유한회사 와이제이에이치와',
-              bank_id: 2,
-              type: 'card',
-            },
-          ],
-        },
+        FormData: {},
       }
     },
+    mounted() {
+      this.init()
+    },
     methods: {
+      init() {
+        this.FormData = JSON.parse(this.$route.query.info)
+      },
       async submit() {
-        await rechargeAct_post()
+        const res = await rechargeAct_post({
+          pay_type: this.FormData.type,
+          money: this.FormData.pay_num,
+          bank_id: this.FormData.bank_id,
+        })
+        Toast.success(res.info)
       },
     },
   }
 </script>
-<style lang="scss">
-  .pay {
-    .van-radio__icon--checked {
-      .van-icon {
-        background-color: #d2a05f;
-        border-color: #d2a05f;
-      }
-    }
-  }
-</style>
+
 <style lang="scss" scoped>
   .app-container {
-    background: #f0f0f0;
-    .bg {
-      width: 100%;
-      height: 130px;
-      background: #00b8f2;
-      position: absolute;
-      top: 0;
-      left: 0;
-    }
+    background: #0a0a0a;
+    color: #fff;
+    padding-top: 46px;
     .box {
-      margin-top: 1rem;
-      margin-left: 3.2%;
-      padding-bottom: 1rem;
-      width: 93.6%;
-      border-radius: 0.6rem;
-      background-color: #fff;
-      position: relative;
-      z-index: 99;
-      .top {
-        padding-top: 1rem;
-        .t1 {
-          margin-left: 10%;
-          font-size: 0.8rem;
-          font-weight: 400;
-          font-stretch: normal;
-          letter-spacing: 0;
-          color: #333;
-          margin-bottom: 0.5rem;
+      padding: 0 1rem;
+      .item {
+        padding: 0.8rem 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        display: flex;
+        align-items: center;
+        font-size: 14px;
+        .label {
+          margin-right: 1rem;
+          text-align: right;
+          width: 6.5rem;
         }
-        .t2 {
-          margin-left: 10%;
-          font-size: 0.95rem;
-          font-weight: 400;
-          font-stretch: normal;
-          letter-spacing: 0;
-          color: #9b9688;
-          margin-bottom: 0.5rem;
-        }
-        .t3 {
-          margin-left: 7%;
-          font-family: ArialMT;
-          font-size: 1.3rem;
-          font-weight: 400;
-          font-stretch: normal;
-          letter-spacing: 0;
-          color: #333;
-          font-weight: bold;
-        }
-      }
-      .payway {
-        width: 90%;
-        margin-left: 5%;
-        .van-cell {
-          padding: 1rem 0;
-          font-size: 1.2rem;
-          line-height: 2rem;
+        .fieldbox {
           background: transparent;
-          color: #fff;
-        }
-        .van-radio {
-          justify-content: space-between;
-          padding: 1rem 0;
-          font-size: 1.2rem;
-          line-height: 2rem;
-          color: #fff !important;
-        }
-        .item {
-          border-bottom: 1px solid #eee;
-          padding: 1rem 0.5rem;
-        }
-        img {
-          width: 22px;
-          height: 22px;
-          border-radius: 50%;
-          margin-right: 10px;
+          border: none;
+          padding: 0.4rem 0.5rem;
+          // margin-top: 0.5rem;
+          border-radius: 0.3rem;
         }
       }
-      .btn {
-        border: none;
-        padding: 0;
-        margin: 1.5rem auto;
-        cursor: pointer;
-        width: 88%;
-        height: 3rem;
-        line-height: 3rem;
-        text-align: center;
-        background: #00b8f2;
-        border-radius: 0.6rem;
-        color: #fff;
-      }
+    }
+    .btn {
+      background-color: rgb(210, 160, 95);
+      border-color: rgb(210, 160, 95);
+      height: 2.4rem;
+      width: 80%;
+      margin: 1rem auto 0;
+      padding: 0;
+      font-size: 1.1rem;
+      border-radius: 1.2rem;
     }
   }
 </style>

@@ -13,7 +13,7 @@
         <van-icon name="user-o" />
         <div>{{ userInfo.account }}</div>
       </div>
-      <div class="item hasp">
+      <!-- <div class="item hasp">
         <van-icon name="phone-o" />
         <div class="zn-flex zn-ai-center zn-jc-between zn-flex-1">
           <div>{{ userInfo.phone.slice(0, 2) + '***' + userInfo.phone.slice(5) }}</div>
@@ -25,9 +25,9 @@
         <div class="zn-flex-1">
           <van-field class="fieldbox" v-model="code" placeholder="SMS verification code" />
         </div>
-        <!-- <div class="send zn-flex zn-ai-center zn-jc-center">Send</div> -->
+        <div class="send zn-flex zn-ai-center zn-jc-center">Send</div>
         <img style="width: 5rem; height: 2rem" :src="yzmCode" alt="" @click="getCode" />
-      </div>
+      </div> -->
       <div class="item">
         <van-icon name="closed-eye" />
         <div class="zn-flex-1">

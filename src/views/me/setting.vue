@@ -1,8 +1,8 @@
 <!--
  * @Author: xyw
  * @Date: 2022-04-11 11:51:14
- * @LastEditors: lz
- * @LastEditTime: 2022-04-22 10:48:09
+ * @LastEditors: xyw
+ * @LastEditTime: 2022-04-24 09:23:41
  * @Description: 
 -->
 <template>
@@ -12,7 +12,7 @@
       <div class="item" @click="$router.push('/me/info')">
         <div>Personal information</div>
         <div class="zn-flex zn-ai-center">
-          <img src="../../assets/images/home/women.png" alt="" />
+          <img :src="userInfo.headimgurl" alt="" />
           <van-icon name="arrow" />
         </div>
       </div>
@@ -45,6 +45,11 @@
     },
     data() {
       return {}
+    },
+    computed: {
+      userInfo() {
+        return this.$store.getters.userInfo
+      },
     },
     methods: {
       ...mapActions({ A_LOGIN_OUT: 'user/A_LOGIN_OUT' }),

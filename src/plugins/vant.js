@@ -2,7 +2,7 @@
  * @Author: xyw
  * @Date: 2022-04-11 11:51:14
  * @LastEditors: xyw
- * @LastEditTime: 2022-04-21 20:34:13
+ * @LastEditTime: 2022-04-24 10:04:03
  * @Description:
  */
 import Vue from 'vue'
@@ -26,6 +26,7 @@ import {
   Stepper,
   Dialog,
   Picker,
+  Loading,
 } from 'vant'
 Vue.use(Button)
 Vue.use(Toast)
@@ -46,3 +47,4 @@ Vue.use(Popup)
 Vue.use(Stepper)
 Vue.use(Dialog)
 Vue.use(Picker)
+Vue.use(Loading)

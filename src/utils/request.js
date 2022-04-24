@@ -2,8 +2,8 @@
  * @Description:
  * @Author: lz
  * @Date: 2022-04-17 14:38:53
- * @LastEditTime: 2022-04-23 16:53:35
- * @LastEditors: lz
+ * @LastEditTime: 2022-04-24 10:23:56
+ * @LastEditors: xyw
  */
 import axios from 'axios'
 import { Toast } from 'vant'
@@ -29,6 +29,11 @@ service.interceptors.request.use(
       // please modify it according to the actual situation
       config.headers['token'] = store.getters.token
     }
+    Toast.loading({
+      duration: 0,
+      message: '加载中...',
+      forbidClick: true,
+    })
     return config
   },
   (error) => {
@@ -53,6 +58,7 @@ service.interceptors.response.use(
   (response) => {
     const res = response.data
     console.log(res)
+    Toast.clear()
     if (res.code !== 1) {
       if (res.code === -98) {
         // Dialog.confirm({
