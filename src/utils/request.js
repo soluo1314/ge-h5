@@ -2,7 +2,7 @@
  * @Description:
  * @Author: lz
  * @Date: 2022-04-17 14:38:53
- * @LastEditTime: 2022-04-24 10:33:18
+ * @LastEditTime: 2022-04-24 18:22:30
  * @LastEditors: lz
  */
 import axios from 'axios'
@@ -57,7 +57,6 @@ service.interceptors.response.use(
    */
   (response) => {
     const res = response.data
-    console.log(res)
     Toast.clear()
     if (res.code !== 1) {
       if (res.code === -98) {

@@ -1,8 +1,8 @@
 <!--
  * @Author: xyw
  * @Date: 2022-04-11 11:51:14
- * @LastEditors: xyw
- * @LastEditTime: 2022-04-24 16:55:13
+ * @LastEditors: lz
+ * @LastEditTime: 2022-04-24 18:23:40
  * @Description: 
 -->
 <template>
@@ -26,9 +26,7 @@
               <div class="zn-flex zn-jc-between tr">
                 <div>{{ item.create_time }}</div>
                 <template v-if="item.finish == 0">
-                  <div v-if="item.receive == 1" class="btn red" @click="Receive(item.osn)"
-                    >Receive</div
-                  >
+                  <div v-if="item.receive == 1" class="btn red" @click="Receive(item)">Receive</div>
                   <div v-else class="btn">Receive</div>
                 </template>
                 <div class="zn-text-orange" v-else>Finish</div>
@@ -78,14 +76,16 @@
         this.loading = true
         this.getList()
       },
-      async Receive(osn) {
+      async Receive(item) {
         const res = await receiveProfit({
-          osn: osn,
+          osn: item.osn,
         })
+        // eslint-disable-next-line require-atomic-updates
+        item.receive = 0
         Toast.success(res.info)
-        this.page = 1
-        this.list = []
-        this.getList()
+        // this.page = 1
+        // this.list = []
+        // this.getList()
       },
     },
   }
