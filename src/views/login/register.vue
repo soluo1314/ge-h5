@@ -2,7 +2,7 @@
  * @Author: xyw
  * @Date: 2022-04-11 11:51:14
  * @LastEditors: lz
- * @LastEditTime: 2022-04-24 10:31:30
+ * @LastEditTime: 2022-04-24 17:13:38
  * @Description: 
 -->
 <template>
@@ -79,6 +79,7 @@
 
 <script>
   import { register, getRegVcode } from '@/api/userApi'
+  import { Toast } from 'vant'
   export default {
     name: 'register',
     data() {
@@ -87,23 +88,40 @@
         password: '',
         captcha_id: '',
         imgcode: '',
-        icode: 'H4RSP8',
+        icode: '',
         yzmImg: require('../../assets/images/login/yzm.jpg'),
       }
     },
     created() {
       this.getCode()
+      if (this.$route.query.icode) {
+        this.icode = this.$route.query.icode
+      }
     },
     methods: {
+      regSubmit(param) {
+        return new Promise((resolve, reject) => {
+          register(param)
+            .then(async (res) => {
+              resolve()
+              await Toast.success(res.info)
+              setTimeout(() => {
+                this.$router.push('/login')
+              }, 2000)
+            })
+            .catch((err) => {
+              reject(err)
+            })
+        })
+      },
       async onSubmit() {
-        await register({
+        await this.regSubmit({
           account: this.account,
           password: this.password,
           captcha_id: this.captcha_id,
           imgcode: this.imgcode,
           icode: this.icode,
         })
-        this.$router.push('/login')
       },
       async getCode() {
         const res = await getRegVcode()
