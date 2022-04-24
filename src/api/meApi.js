@@ -2,7 +2,7 @@
  * @Author: xyw
  * @Date: 2022-04-21 17:08:25
  * @LastEditors: xyw
- * @LastEditTime: 2022-04-21 20:36:01
+ * @LastEditTime: 2022-04-24 18:15:04
  * @Description:
  */
 import request from '../utils/request.js'
@@ -19,6 +19,14 @@ export function balancelog(params) {
   return request({
     method: 'get',
     url: '/api/finance/balancelog',
+    params,
+  })
+}
+//reward
+export function reward(params) {
+  return request({
+    method: 'get',
+    url: '/api/finance/reward',
     params,
   })
 }

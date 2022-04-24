@@ -2,7 +2,7 @@
  * @Author: xyw
  * @Date: 2022-04-11 11:51:14
  * @LastEditors: xyw
- * @LastEditTime: 2022-04-22 16:25:38
+ * @LastEditTime: 2022-04-24 18:35:57
  * @Description: 
 -->
 <template>
@@ -139,6 +139,7 @@
           ''
         )
         this.FormData.service.qrcode += process.env.VUE_APP_PIC_URL
+        localStorage.setItem('community_url', res.data.community_url)
         console.log(res)
       },
     },

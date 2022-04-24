@@ -2,7 +2,7 @@
  * @Author: xyw
  * @Date: 2022-04-11 11:51:14
  * @LastEditors: xyw
- * @LastEditTime: 2022-04-22 11:07:56
+ * @LastEditTime: 2022-04-24 18:14:26
  * @Description: 
 -->
 <template>
@@ -16,21 +16,21 @@
       </div>
     </div>
     <div class="tab1 zn-flex zn-ai-center">
-      <div class="zn-flex-1">
+      <div class="zn-flex-1" @click="$router.push('/home/recharge')">
         <div>{{ FormData.wallet.balance }}</div>
         <div>Recharge Wallet</div>
       </div>
-      <div class="zn-flex-1">
+      <div class="zn-flex-1" @click="$router.push('/home/withdrawal')">
         <div>{{ FormData.wallet2.balance }}</div>
         <div>Balance Wallet</div>
       </div>
     </div>
     <div class="tab2 zn-flex zn-ai-center zn-mt-1">
-      <div class="zn-flex-1">
+      <div class="zn-flex-1" @click="$router.push('/me/financialType?s_type=1')">
         <div>{{ FormData.reward }}</div>
         <div>Profit</div>
       </div>
-      <div class="zn-flex-1">
+      <div class="zn-flex-1" @click="$router.push('/me/financialType?s_type=2')">
         <div>{{ FormData.rebate }}</div>
         <div>Commission</div>
       </div>
@@ -40,15 +40,15 @@
       </div>
     </div>
     <div class="tab2 zn-flex zn-ai-center">
-      <div class="zn-flex-1">
+      <div class="zn-flex-1" @click="$router.push('/me/product')">
         <div>{{ FormData.investment }}</div>
         <div>Products</div>
       </div>
-      <div class="zn-flex-1">
+      <div class="zn-flex-1" @click="$router.push('/home/recharge')">
         <div>{{ FormData.recharge }}</div>
         <div>Recharge</div>
       </div>
-      <div class="zn-flex-1">
+      <div class="zn-flex-1" @click="$router.push('/home/withdrawal')">
         <div>{{ FormData.withdraw }}</div>
         <div>Withdraw</div>
       </div>
