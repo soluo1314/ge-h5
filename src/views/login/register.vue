@@ -2,14 +2,14 @@
  * @Author: xyw
  * @Date: 2022-04-11 11:51:14
  * @LastEditors: lz
- * @LastEditTime: 2022-04-22 09:23:24
+ * @LastEditTime: 2022-04-24 10:31:30
  * @Description: 
 -->
 <template>
   <div class="app-container">
     <van-form @submit="onSubmit">
       <div class="box">
-        <div class="zn-bold zn-text-ct zn-mb-2">Sign in</div>
+        <div class="zn-bold zn-text-ct zn-mb-2">Sign up</div>
 
         <div class="item">
           <img src="../../assets/images/login/phone.png" alt="" />
@@ -18,7 +18,7 @@
               class="fieldbox"
               v-model="account"
               placeholder="Please enter your phone number to log in"
-              :rules="[{ required: true, message: 'Please enter your phone number to log in' }]"
+              :rules="[{ required: true }]"
             />
           </div>
         </div>
@@ -30,14 +30,20 @@
               type="password"
               v-model="password"
               placeholder="Please enter the login password"
-              :rules="[{ required: true, message: 'Please enter the login password' }]"
+              :rules="[{ required: true }]"
             />
           </div>
         </div>
         <div class="item">
-          <van-icon name="envelop-o" />
+          <!-- <van-icon name="envelop-o" /> -->
+          <img src="../../assets/images/login/code.png" alt="" />
           <div class="zn-flex-1">
-            <van-field class="fieldbox" v-model="imgcode" placeholder="SMS verification code" />
+            <van-field
+              class="fieldbox"
+              v-model="imgcode"
+              placeholder="Graphic verification code"
+              :rules="[{ required: true }]"
+            />
           </div>
           <img
             style="width: 5rem; height: 2.2rem; margin-right: -4.266667vw"
@@ -54,6 +60,7 @@
               class="fieldbox"
               v-model="icode"
               placeholder="Please enter the invitation code"
+              :rules="[{ required: true }]"
             />
           </div>
         </div>
@@ -124,7 +131,9 @@
         display: flex;
         align-items: center;
         padding: 0px 16px;
-
+        .van-icon {
+          margin-right: 1.1rem !important;
+        }
         img {
           width: 20px;
           height: 20px;

@@ -2,8 +2,8 @@
  * @Description:
  * @Author: lz
  * @Date: 2022-04-17 14:38:53
- * @LastEditTime: 2022-04-24 10:23:56
- * @LastEditors: xyw
+ * @LastEditTime: 2022-04-24 10:33:18
+ * @LastEditors: lz
  */
 import axios from 'axios'
 import { Toast } from 'vant'
@@ -31,7 +31,7 @@ service.interceptors.request.use(
     }
     Toast.loading({
       duration: 0,
-      message: '加载中...',
+      message: 'loading...',
       forbidClick: true,
     })
     return config
