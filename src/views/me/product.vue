@@ -2,7 +2,7 @@
  * @Author: xyw
  * @Date: 2022-04-11 11:51:14
  * @LastEditors: xyw
- * @LastEditTime: 2022-04-22 14:05:08
+ * @LastEditTime: 2022-04-24 16:55:13
  * @Description: 
 -->
 <template>
@@ -25,10 +25,13 @@
               <div class="tr">Profit: {{ item.profit_days }}days ₹{{ item.profit_reward }}</div>
               <div class="zn-flex zn-jc-between tr">
                 <div>{{ item.create_time }}</div>
-                <div v-if="item.status == 1" class="btn red" @click="Receive(item.osn)"
-                  >Receive</div
-                >
-                <div v-else class="btn">Receive</div>
+                <template v-if="item.finish == 0">
+                  <div v-if="item.receive == 1" class="btn red" @click="Receive(item.osn)"
+                    >Receive</div
+                  >
+                  <div v-else class="btn">Receive</div>
+                </template>
+                <div class="zn-text-orange" v-else>Finish</div>
               </div>
             </div>
           </div>

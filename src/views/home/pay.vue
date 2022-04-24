@@ -2,7 +2,7 @@
  * @Author: xyw
  * @Date: 2022-04-11 11:51:14
  * @LastEditors: xyw
- * @LastEditTime: 2022-04-24 10:24:55
+ * @LastEditTime: 2022-04-24 17:18:59
  * @Description: 
 -->
 <template>
@@ -25,9 +25,13 @@
         <div class="label">money :</div>
         <div>{{ FormData.pay_num }}</div>
       </div>
+      <div class="item">
+        <div class="label">pic :</div>
+        <div><van-uploader v-model="fileList" max-count="1" :after-read="afterRead" /></div>
+      </div>
     </div>
-    <div class="btn zn-flex zn-ai-center zn-jc-center">
-      <div @click="submit">Submit</div>
+    <div class="btn zn-flex zn-ai-center zn-jc-center" @click="submit">
+      <div>Submit</div>
     </div>
   </div>
 </template>
@@ -44,6 +48,8 @@
     data() {
       return {
         FormData: {},
+        fileList: [],
+        pic: '',
       }
     },
     mounted() {
@@ -58,8 +64,25 @@
           pay_type: this.FormData.type,
           money: this.FormData.pay_num,
           bank_id: this.FormData.bank_id,
+          pic: this.pic,
         })
         Toast.success(res.info)
+      },
+      async afterRead(file) {
+        this.pic = await this.getBase64(file.file)
+      },
+      getBase64(file) {
+        return new Promise((resolve, reject) => {
+          ///FileReader类就是专门用来读文件的
+          const reader = new FileReader()
+          //开始读文件
+          //readAsDataURL: dataurl它的本质就是图片的二进制数据， 进行base64加密后形成的一个字符串，
+          reader.readAsDataURL(file)
+          // 成功和失败返回对应的信息，reader.result一个base64，可以直接使用
+          reader.onload = () => resolve(reader.result)
+          // 失败返回失败的信息
+          reader.onerror = (error) => reject(error)
+        })
       },
     },
   }
