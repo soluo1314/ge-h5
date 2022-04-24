@@ -2,7 +2,7 @@
  * @Author: xyw
  * @Date: 2022-04-11 11:51:14
  * @LastEditors: lz
- * @LastEditTime: 2022-04-22 10:49:08
+ * @LastEditTime: 2022-04-24 10:03:37
  * @Description: 
 -->
 <template>
@@ -17,7 +17,7 @@
               class="fieldbox"
               v-model="account"
               placeholder="Please enter your phone number to log in"
-              :rules="[{ required: true, message: 'Please enter your phone number to log in' }]"
+              :rules="[{ required: true }]"
             />
           </div>
         </div>
@@ -29,14 +29,19 @@
               type="password"
               v-model="password"
               placeholder="Please enter the login password"
-              :rules="[{ required: true, message: 'Please enter the login password' }]"
+              :rules="[{ required: true }]"
             />
           </div>
         </div>
         <div class="item">
           <img src="../../assets/images/login/code.png" alt="" />
           <div class="zn-flex-1">
-            <van-field class="fieldbox" v-model="vcode" placeholder="Graphic verification code" />
+            <van-field
+              class="fieldbox"
+              v-model="vcode"
+              placeholder="Graphic verification code"
+              :rules="[{ required: true }]"
+            />
           </div>
           <img
             style="width: 5rem; height: 2.2rem; margin-right: -4.266667vw"
