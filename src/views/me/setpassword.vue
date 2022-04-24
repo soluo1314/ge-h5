@@ -2,7 +2,7 @@
  * @Author: xyw
  * @Date: 2022-04-11 11:51:14
  * @LastEditors: xyw
- * @LastEditTime: 2022-04-24 09:40:44
+ * @LastEditTime: 2022-04-24 14:28:12
  * @Description: 
 -->
 <template>
@@ -28,6 +28,17 @@
         <div class="send zn-flex zn-ai-center zn-jc-center">Send</div>
         <img style="width: 5rem; height: 2rem" :src="yzmCode" alt="" @click="getCode" />
       </div> -->
+      <div class="item">
+        <van-icon name="shield-o" />
+        <div class="zn-flex-1">
+          <van-field
+            class="fieldbox"
+            type="password"
+            v-model="o_password"
+            placeholder="Old password"
+          />
+        </div>
+      </div>
       <div class="item">
         <van-icon name="closed-eye" />
         <div class="zn-flex-1">
@@ -75,6 +86,7 @@
     data() {
       return {
         code: '',
+        o_password: '',
         password: '',
         password2: '',
         yzmCode: require('../../assets/images/login/yzm.jpg'),
@@ -91,6 +103,7 @@
         }
         const res = await password_update({
           password: this.password,
+          o_password: this.o_password,
           type: 1,
         })
         Toast.success(res.info)
