@@ -2,7 +2,7 @@
  * @Author: xyw
  * @Date: 2022-04-11 11:51:14
  * @LastEditors: xyw
- * @LastEditTime: 2022-04-22 14:27:29
+ * @LastEditTime: 2022-04-24 08:55:35
  * @Description: 
 -->
 <template>
@@ -25,7 +25,8 @@
         <div class="zn-flex-1">
           <van-field class="fieldbox" v-model="code" placeholder="SMS verification code" />
         </div>
-        <div class="send zn-flex zn-ai-center zn-jc-center">Send</div>
+        <!-- <div class="send zn-flex zn-ai-center zn-jc-center">Send</div> -->
+        <img style="width: 5rem; height: 2rem" :src="yzmCode" alt="" @click="getCode" />
       </div>
       <div class="item">
         <van-icon name="closed-eye" />
@@ -57,6 +58,7 @@
 </template>
 
 <script>
+  import { getVcode } from '@/api/userApi'
   import { password_update } from '@/api/meApi'
   import { Toast } from 'vant'
   import NavBar from '@/components/NavBar'
@@ -75,7 +77,11 @@
         code: '',
         password: '',
         password2: '',
+        yzmCode: require('../../assets/images/login/yzm.jpg'),
       }
+    },
+    created() {
+      this.getCode()
     },
     methods: {
       async submit() {
@@ -88,6 +94,11 @@
           type: 1,
         })
         Toast.success(res.info)
+      },
+      async getCode() {
+        const res = await getVcode()
+        this.captcha_id = res.data.captcha_id
+        this.yzmCode = res.data.image
       },
     },
   }
