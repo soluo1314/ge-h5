@@ -30,12 +30,12 @@ module.exports = {
       errors: true,
     },
     proxy: {
-      '/geh5/api': {
+      '/api': {
         target: 'https://api2.kk8898.co',
         changeOrigin: true, //是否跨域
-        pathRewrite: {
-          '^/geh5/api': '/api',
-        },
+        // pathRewrite: {
+        //   '^/geh5/api': '/api',
+        // },
       },
     },
   },
